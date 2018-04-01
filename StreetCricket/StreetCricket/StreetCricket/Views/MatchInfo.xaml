@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="StreetCricket.Views.MatchInfo" 
+             Style="{DynamicResource BackgroundStyle}"
+             Title="Match Information">
+    <ContentPage.Content>
+        <StackLayout >
+            <Label Text="{Binding MatchName}" />
+            <Label Text="{Binding MatchId}" />
+            <Label x:Name="LblOvers" Text="Overs" Style="{DynamicResource LabelStyle}"></Label>
+            <Entry x:Name="EntryNumberOfOvers" Placeholder="50"></Entry>
+            <controls:BindableRadioGroup>
+                <controls:CustomRadioButton x:Name="RdBtnLimitedOvers" Text="Limited Overs"></controls:CustomRadioButton>
+                <controls:CustomRadioButton x:Name="RdBtnTest" Text="Test"></controls:CustomRadioButton>
+            </controls:BindableRadioGroup> 
+            <Button x:Name="BtnCoinToss" Text="Coin Toss" Clicked="OnCoinTossClicked"></Button>
+            <Button x:Name="BtnSelectPlayers" Text="Select Players" Clicked="OnSelectPlayersClicked"></Button>
+            <Button x:Name="BtnStartMatch" Text="Start Match" Clicked="OnStartMatchClicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

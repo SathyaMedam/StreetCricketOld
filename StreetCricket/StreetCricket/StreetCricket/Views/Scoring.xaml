@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StreetCricket.Views.Scoring">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="BtnStartInnings" Text="Start Innings" Clicked="OnStartInningsClicked"></Button>
+            <Button x:Name="BtnEndInnings" Text="End Innings" Clicked="OnEndInningsClicked"></Button>
+
+            <Label x:Name="Runs" Text="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="BtnStartOver" Text="StartOver" Clicked="OnStartOverClicked"></Button>
+            <Button x:Name="Btn1Run" Text="1" Clicked="On1RunClicked"></Button>
+            <Button x:Name="BtnEndOver" Text="EndOver" Clicked="OnEndOverClicked"></Button>
+</StackLayout>
+    </ContentPage.Content>
+</ContentPage>
