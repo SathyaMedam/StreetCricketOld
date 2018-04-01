@@ -9,7 +9,11 @@ namespace CricketLIbrary.Model
         public BallType BallType { get; set; }
         public BallAttemptStatus BallAttemptStatus { get; set; }
         public bool IsFinished { get; set; }
-
+        public CricketPlayer Bowler { get; set; }
+        public CricketPlayer Batsmen { get; set; }
+        public CricketPlayer Fielder { get; set; }
+        public bool IsDismissal { get; set; }
+        public DisMissalType DisMissalType { get; set; }
         public Ball()
         {
                 Runs=new Runs();
@@ -30,5 +34,17 @@ namespace CricketLIbrary.Model
         NotStarted,
         InProgress,
         Finished
+    }
+
+    public enum DisMissalType
+    {
+        Bowled,
+        Caught,
+        RunOut,
+        StumpOut,
+        HitWicket,
+        Lbw,
+        HandledTheBall,
+        Mankad
     }
 }

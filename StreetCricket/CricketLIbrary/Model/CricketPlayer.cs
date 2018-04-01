@@ -22,6 +22,15 @@ namespace CricketLIbrary.Model
         public int NumberOfMaidensBowled { get; set; }
         public int NumberOfzerosBowled { get; set; }
         public int NumberOfWickets { get; set; }
+        public bool Dismissed { get; set; }
+
+        public CricketPlayer(Player player)
+        {
+            this.Id = player.Id;
+            this.Name = player.Name;
+            this.TeamId = player.TeamId;
+                              
+        }
 
     }
 

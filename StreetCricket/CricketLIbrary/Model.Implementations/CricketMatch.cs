@@ -28,9 +28,12 @@ namespace CricketLIbrary.Model.Implementations
                 Overs = new List<Over>(),
                 InningsStatus = InningsStatus.InProgress,
                 InningsNumber = 1,
-                Striker = (CricketPlayer) match.HomeTeam.Players.FirstOrDefault(x=>x.Id==1),
-                NonStriker = (CricketPlayer) match.HomeTeam.Players.FirstOrDefault(x => x.Id == 1)
+              
             };
+            var striker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 1);
+            innings1.Striker= new CricketPlayer(striker);
+            var nonStriker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 2);
+            innings1.NonStriker = new CricketPlayer(nonStriker);
             innings1.Runs = innings1.Overs.SelectMany(x => x.Balls).Sum(y => y.Runs.RunsScored);
             var innings2 = new Innings
             {
@@ -73,9 +76,9 @@ namespace CricketLIbrary.Model.Implementations
             if (currentInnings != null) currentInnings.InningsStatus = InningsStatus.InProgress;
         }
 
-        public void AddBall(Over currentOver, BallType ballType, Runs runs,CricketPlayer bowler, CricketPlayer batsmen)
+        public void AddBall(Over currentOver, BallType ballType, Runs runs, CricketPlayer bowler, CricketPlayer batsmen, bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
         {
-            var ball = new Ball { BallAttemptStatus = BallAttemptStatus.InProgress };
+            var ball = new Ball { BallAttemptStatus = BallAttemptStatus.InProgress};
             if (ballType==BallType.Legitimate)
             {
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished) + 1;
@@ -105,5 +108,6 @@ namespace CricketLIbrary.Model.Implementations
             }
             currentOver.Balls.Add(ball);
         }
+
     }
 }
