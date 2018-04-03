@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StreetCricket.Views.LoginPage" 
              Style="{DynamicResource BackgroundStyle}">
-    <StackLayout x:Name="MasterLayout" >
+    <StackLayout x:Name="MasterLayout" Padding="10" >
         <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand">
             <Image x:Name="LoginIcon" Source="login.png" Margin="0,80,0,0"></Image>
         </StackLayout>
@@ -12,11 +12,11 @@
                
             </StackLayout.Padding>
             <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"></ActivityIndicator>
-            <Label x:Name="LblUsername" Text="Username" Style="{DynamicResource LabelStyle}"></Label>
+            <Label x:Name="LblUsername" Text="User Name" Style="{DynamicResource LabelStyle}"></Label>
                     <Entry x:Name="EntryUsername" Placeholder="Username"></Entry>
             <Label x:Name="LblPassword" Text="Password" Style="{DynamicResource LabelStyle}"></Label>
                     <Entry x:Name="EntryPassword" Placeholder="Password"></Entry>
-                    <Button x:Name="BtnSignin" Text="Sign In" Clicked="OnSignInClicked"></Button>
+            <Button x:Name="BtnSignin" Text="Sign In"  Style="{DynamicResource Button}" Clicked="OnSignInClicked"></Button>
                 </StackLayout>
         </StackLayout>
 </ContentPage>

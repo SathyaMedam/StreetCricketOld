@@ -6,12 +6,14 @@
              Title="Match List">
 
     <ContentPage.Content>
-        <ListView x:Name="MatchListView"  ItemSelected="OnMatchSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <TextCell Text="{Binding MatchName}"></TextCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackLayout Padding="10">
+            <ListView x:Name="MatchListView" ItemSelected="OnMatchSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <TextCell Text="{Binding MatchName}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

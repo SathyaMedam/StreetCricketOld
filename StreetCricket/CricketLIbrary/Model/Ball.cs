@@ -38,6 +38,7 @@ namespace CricketLIbrary.Model
 
     public enum DisMissalType
     {
+        None,
         Bowled,
         Caught,
         RunOut,

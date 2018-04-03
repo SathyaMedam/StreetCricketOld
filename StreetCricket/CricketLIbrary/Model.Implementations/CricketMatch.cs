@@ -86,6 +86,15 @@ namespace CricketLIbrary.Model.Implementations
                 ball.Runs.RunsScored = runs.RunsScored;
                 batsmen.RunsScored = runs.RunsScored;
                 ball.IsFinished = true;
+                if (isDismissal)
+                {
+                    dismissedPlayer.Dismissed = true;
+                 CurrentInnings.Striker=new CricketPlayer(CurrentInnings.InningsTeam.Players.FirstOrDefault(x=>x.Id==3));
+                }
+
+
+
+
             }
             if (ballType == BallType.Wide)
             {

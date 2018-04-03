@@ -3,28 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StreetCricket.Views.Scoring"
              Style="{DynamicResource BackgroundStyle}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="PlainButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="RoyalBlue"/>
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="50"/>
-                <Setter Property="FontSize" Value="30" />
-            </Style>
-            <Style x:Key="DarkerButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="DarkSlateBlue"/>
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="50"/>
-                <Setter Property="FontSize" Value="30" />
-            </Style>
-            <Style x:Key="OrangeButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#E8AD00"/>
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="50"/>
-                <Setter Property="FontSize" Value="30" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid x:Name="ControlGrid" RowSpacing="1" ColumnSpacing="1">
             <Grid.RowDefinitions>
@@ -82,30 +60,30 @@
                     <Label x:Name="LblRecentOvers" Text="2 | 6 | . |" Style="{DynamicResource LabelStyle}"></Label>
                 </StackLayout>
             </StackLayout>
-            <Button x:Name="Btn0Runs" Text = "0" Grid.Row="1" Grid.Column="0" Style="{StaticResource DarkerButton}" Clicked="On0RunClicked"></Button>
-            <Button x:Name="Btn1Run" Text = "1" Grid.Row="1" Grid.Column="1" Style="{StaticResource DarkerButton}" Clicked="On1RunClicked"></Button>
-            <Button x:Name="Btn2Runs" Text = "2" Grid.Row="1" Grid.Column="2" Style="{StaticResource DarkerButton}" Clicked="On2RunClicked"></Button>
-            <Button x:Name="Btn3Runs" Text = "3" Grid.Row="1" Grid.Column="3" Style="{StaticResource DarkerButton}" Clicked="On3RunClicked"></Button>
+            <Button x:Name="Btn0Runs" Text = "0" Grid.Row="1" Grid.Column="0" Style="{DynamicResource DarkerButton}" Clicked="On0RunClicked"></Button>
+            <Button x:Name="Btn1Run" Text = "1" Grid.Row="1" Grid.Column="1" Style="{DynamicResource DarkerButton}" Clicked="On1RunClicked"></Button>
+            <Button x:Name="Btn2Runs" Text = "2" Grid.Row="1" Grid.Column="2" Style="{DynamicResource DarkerButton}" Clicked="On2RunClicked"></Button>
+            <Button x:Name="Btn3Runs" Text = "3" Grid.Row="1" Grid.Column="3" Style="{DynamicResource DarkerButton}" Clicked="On3RunClicked"></Button>
 
-            <Button x:Name="Btn4Runs" Text = "4" Grid.Row="2" Grid.Column="0" Style="{StaticResource PlainButton}" Clicked="On4RunClicked"></Button>
-            <Button x:Name="Btn4PlusRuns" Text = "4" Grid.Row="2" Grid.Column="1" Style="{StaticResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
-            <Button x:Name="Btn6Runs" Text = "6" Grid.Row="2" Grid.Column="2" Style="{StaticResource PlainButton}" Clicked="On6RunClicked"></Button>
-            <Button x:Name="BtnWicket" Text = "W" Grid.Row="2" Grid.Column="3" Style="{StaticResource PlainButton}" Clicked="OnWicketRunClicked"></Button>
+            <Button x:Name="Btn4Runs" Text = "4" Grid.Row="2" Grid.Column="0" Style="{DynamicResource PlainButton}" Clicked="On4RunClicked"></Button>
+            <Button x:Name="Btn4PlusRuns" Text = "4" Grid.Row="2" Grid.Column="1" Style="{DynamicResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
+            <Button x:Name="Btn6Runs" Text = "6" Grid.Row="2" Grid.Column="2" Style="{DynamicResource PlainButton}" Clicked="On6RunClicked"></Button>
+            <Button x:Name="BtnWicket" Text = "W" Grid.Row="2" Grid.Column="3" Style="{DynamicResource PlainButton}" Clicked="OnWicketClicked"></Button>
             <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
-                <Button x:Name="BtnWide" Text = "WD" Style="{StaticResource OrangeButton}" Clicked="OnWideClicked"></Button>
-                <Button x:Name="BtnNoBall" Text = "NB" Style="{StaticResource OrangeButton}" Clicked="OnNoBallClicked"></Button>
-                <Button x:Name="BtnNoBallBat" Text = "NB" Style="{StaticResource OrangeButton}" Clicked="OnNoBallBatClicked"></Button>
-                <Button x:Name="BtnStartInnings" Text="Start Innings" Style="{StaticResource OrangeButton}" Clicked="OnStartInningsClicked"></Button>
+                <Button x:Name="BtnWide" Text = "WD" Style="{DynamicResource OrangeButton}" Clicked="OnWideClicked"></Button>
+                <Button x:Name="BtnNoBall" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallClicked"></Button>
+                <Button x:Name="BtnNoBallBat" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallBatClicked"></Button>
+                <Button x:Name="BtnStartInnings" Text="SI" Style="{DynamicResource OrangeButton}" Clicked="OnStartInningsClicked"></Button>
              
             </StackLayout>
             <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
-                <Button x:Name="BtnByes" Text = "By"  Style="{StaticResource OrangeButton}"  Clicked="OnByesClicked"></Button>
-                <Button x:Name="BtnLegByes" Text = "LB" Style="{StaticResource OrangeButton}"  Clicked="OnLegByesClicked"></Button>
-                <Button x:Name="BtnDeadBall" Text = "XX" Style="{StaticResource OrangeButton}"  Clicked="OnDeadBallClicked"></Button>
-            <Button x:Name="BtnEndInnings" Text="End Innings" Style="{StaticResource OrangeButton}" Clicked="OnEndInningsClicked"></Button>
+                <Button x:Name="BtnByes" Text = "By"  Style="{DynamicResource OrangeButton}"  Clicked="OnByesClicked"></Button>
+                <Button x:Name="BtnLegByes" Text = "LB" Style="{DynamicResource OrangeButton}"  Clicked="OnLegByesClicked"></Button>
+                <Button x:Name="BtnDeadBall" Text = "XX" Style="{DynamicResource OrangeButton}"  Clicked="OnDeadBallClicked"></Button>
+            <Button x:Name="BtnEndInnings" Text="EI" Style="{DynamicResource OrangeButton}" Clicked="OnEndInningsClicked"></Button>
             </StackLayout>
-            <Button x:Name="BtnStartOver" Text = "Start Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="0" Style="{StaticResource PlainButton}" Clicked="OnStartOverClicked"></Button>
-            <Button  x:Name="BtnEndOver" Text = "End Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="2" Style="{StaticResource PlainButton}" Clicked="OnEndOverClicked"></Button>
+            <Button x:Name="BtnStartOver" Text = "St Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="0" Style="{DynamicResource PlainButton}" Clicked="OnStartOverClicked"></Button>
+            <Button  x:Name="BtnEndOver" Text = "End Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="2" Style="{DynamicResource PlainButton}" Clicked="OnEndOverClicked"></Button>
 
         </Grid>
     </ContentPage.Content>

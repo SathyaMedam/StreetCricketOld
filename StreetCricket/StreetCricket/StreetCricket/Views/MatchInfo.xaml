@@ -1,23 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="StreetCricket.Views.MatchInfo" 
              Style="{DynamicResource BackgroundStyle}"
              Title="Match Information">
     <ContentPage.Content>
-        <StackLayout >
-            <Label Text="{Binding MatchName}" />
-            <Label Text="{Binding MatchId}" />
-            <Label x:Name="LblOvers" Text="Overs" Style="{DynamicResource LabelStyle}"></Label>
-            <Entry x:Name="EntryNumberOfOvers" Placeholder="50"></Entry>
-            <controls:BindableRadioGroup>
-                <controls:CustomRadioButton x:Name="RdBtnLimitedOvers" Text="Limited Overs"></controls:CustomRadioButton>
-                <controls:CustomRadioButton x:Name="RdBtnTest" Text="Test"></controls:CustomRadioButton>
-            </controls:BindableRadioGroup> 
-            <Button x:Name="BtnCoinToss" Text="Coin Toss" Clicked="OnCoinTossClicked"></Button>
+
+        <Grid x:Name="ControlGrid" RowSpacing="1" ColumnSpacing="1" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="MidnightBlue">
+                    <Label Text="{Binding MatchName}" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
+                    <Label Text="{Binding MatchId}" Style="{DynamicResource LabelStyle}"  HorizontalTextAlignment="End" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Label>
+            </StackLayout>
+            <Label  Text="Format"  Grid.Row="1" Grid.Column="0"  Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" >
+                <Label x:Name="LabelSwitchOutcome"  TextColor="ForestGreen" Text="Limited Overs" Style="{DynamicResource LabelStyle}" VerticalOptions="End" HorizontalOptions="EndAndExpand"></Label>
+                <Switch x:Name="SwitchFormat" VerticalOptions="End" Toggled="SwitchFormat_OnToggled"></Switch>
+            </StackLayout>
+            <Label x:Name="LblNumberOfPlayers" Text="Number Of Player Per Team" Grid.Row="2" Grid.Column="0"  Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <Entry x:Name="EntryNumberOfPlayers" Placeholder="11" Text="11" Grid.Row="2" Grid.Column="1" VerticalOptions="End"></Entry>
+            <Label x:Name="LblOvers" Text="Overs"  Grid.Row="3" Grid.Column="0" Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <Entry x:Name="EntryNumberOfOvers" Placeholder="50"  Grid.Row="3" Grid.Column="1" VerticalOptions="End"></Entry>
+            <Label x:Name="LblWideBallValue" Text="Wide Value"  Grid.Row="4" Grid.Column="0" Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <Entry x:Name="EntryWideBallValue" Placeholder="1" Text="1" Grid.Row="4" Grid.Column="1" VerticalOptions="End"></Entry>
+            <Label x:Name="LblNoBallValue" Text="Noball Value" Grid.Row="5" Grid.Column="0" Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <Entry x:Name="EntryNoBallValue" Placeholder="1" Text="1" Grid.Row="5" Grid.Column="1" VerticalOptions="End"></Entry>
+            <Button x:Name="BtnSetFormat" Text="Start Match"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource Button}" Clicked="OnSetMatchFormatClicked"></Button>
+            <Button x:Name="BtnMaster" Text="Master"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource Button}" Clicked="OnMasterClicked"></Button>
+
+</Grid>
+            <!--<Button x:Name="BtnCoinToss" Text="Coin Toss" Clicked="OnCoinTossClicked"></Button>
             <Button x:Name="BtnSelectPlayers" Text="Select Players" Clicked="OnSelectPlayersClicked"></Button>
-            <Button x:Name="BtnStartMatch" Text="Start Match" Clicked="OnStartMatchClicked"></Button>
-        </StackLayout>
+            <Button x:Name="BtnStartMatch" Text="Start Match" Clicked="OnStartMatchClicked"></Button>-->
     </ContentPage.Content>
 </ContentPage>

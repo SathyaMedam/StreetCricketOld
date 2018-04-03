@@ -14,5 +14,10 @@ namespace CricketLIbrary.Model
         public int WideValue { get; set; }
         public int NoBallValue { get; set; }
         public int NumberOfPlayersPerTeam { get; set; }
+
+        public CricketMatchProperties()
+        {
+            FormatType = FormatType.ODI;
+        }
     }
 }
