@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace CricketLIbrary.Model.Implementations
 {
-   public class CricketMatch : ICricketMatch
+    public class CricketMatch : ICricketMatch
     {
         public List<Innings> Innings { get; set; }
         public Innings CurrentInnings { get; set; }
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
+        public Toss Toss { get; set; }
 
         public CricketMatch(Match match)
         {
             Innings = new List<Innings>();
+            Toss=new Toss();
             HomeTeam = match.HomeTeam;
             AwayTeam = match.AwayTeam;
         }
@@ -28,10 +30,10 @@ namespace CricketLIbrary.Model.Implementations
                 Overs = new List<Over>(),
                 InningsStatus = InningsStatus.InProgress,
                 InningsNumber = 1,
-              
+
             };
             var striker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 1);
-            innings1.Striker= new CricketPlayer(striker);
+            innings1.Striker = new CricketPlayer(striker);
             var nonStriker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 2);
             innings1.NonStriker = new CricketPlayer(nonStriker);
             innings1.Runs = innings1.Overs.SelectMany(x => x.Balls).Sum(y => y.Runs.RunsScored);
@@ -45,12 +47,33 @@ namespace CricketLIbrary.Model.Implementations
             innings2.Runs = innings2.Overs.SelectMany(x => x.Balls).Sum(y => y.Runs.RunsScored);
 
             cricketMatch.Innings = new List<Innings> { innings1, innings2 };
+          
             return cricketMatch;
+        }
+
+        public void CoinToss()
+        {
+            if (this.Toss.TeamWonToss == HomeTeam)
+            {
+                var firstInnings = this.Innings.FirstOrDefault();
+                var secondInnings = this.Innings.LastOrDefault();
+                if (this.Toss.TossDecisionType == TossDecisionType.Batting)
+                {
+
+                    if (firstInnings != null) firstInnings.InningsTeam = HomeTeam;
+                    if (secondInnings != null) secondInnings.InningsTeam = AwayTeam;
+                }
+                else
+                {
+                    if (firstInnings != null) firstInnings.InningsTeam = AwayTeam;
+                    if (secondInnings != null) secondInnings.InningsTeam = HomeTeam;
+                }
+            }
         }
 
         public void StartOver(Innings currentInnings, CricketPlayer bowler)
         {
-            var over = new Over {OverStauts = OverStatus.OverInProgress, Bowler = (CricketPlayer) bowler};
+            var over = new Over { OverStauts = OverStatus.OverInProgress, Bowler = (CricketPlayer)bowler };
             over.Number = over.Number + 1;
             currentInnings.CurrentOver = over;
             currentInnings.Overs.Add(over);
@@ -61,7 +84,7 @@ namespace CricketLIbrary.Model.Implementations
             currentOver.OverStauts = OverStatus.OverFinished;
         }
 
-      
+
 
         public void EndInnings()
         {
@@ -78,8 +101,8 @@ namespace CricketLIbrary.Model.Implementations
 
         public void AddBall(Over currentOver, BallType ballType, Runs runs, CricketPlayer bowler, CricketPlayer batsmen, bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
         {
-            var ball = new Ball { BallAttemptStatus = BallAttemptStatus.InProgress};
-            if (ballType==BallType.Legitimate)
+            var ball = new Ball { BallAttemptStatus = BallAttemptStatus.InProgress };
+            if (ballType == BallType.Legitimate)
             {
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished) + 1;
                 ball.BallAttemptNumber = 1;
@@ -89,7 +112,7 @@ namespace CricketLIbrary.Model.Implementations
                 if (isDismissal)
                 {
                     dismissedPlayer.Dismissed = true;
-                 CurrentInnings.Striker=new CricketPlayer(CurrentInnings.InningsTeam.Players.FirstOrDefault(x=>x.Id==3));
+                    CurrentInnings.Striker = new CricketPlayer(CurrentInnings.InningsTeam.Players.FirstOrDefault(x => x.Id == 3));
                 }
 
 

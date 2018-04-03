@@ -91,7 +91,7 @@ namespace StreetCricket.Views
 
             _match.CricketMatchProperties = properties;
 
-            Navigation.PushModalAsync(new ScoringMasterPage());
+            Navigation.PushModalAsync(new ScoringMasterPage(_cricketMatch.GetMatch(_match)));
         }
     }
 }

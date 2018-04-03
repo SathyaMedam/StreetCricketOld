@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StreetCricket.Views.CoinTossPage"
+             Style="{DynamicResource BackgroundStyle}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label  Text="Toss" Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" >
+                <Label x:Name="LabelSwitchTossTeam"  TextColor="ForestGreen"  Style="{DynamicResource LabelStyle}" VerticalOptions="End" HorizontalOptions="EndAndExpand"></Label>
+                <Switch x:Name="SwitchTossTeam" VerticalOptions="End" Toggled="SwitchTossTeam_OnToggled"></Switch>
+            </StackLayout>
+            <Label  Text="Decision" Style="{DynamicResource LabelStyle}" VerticalOptions="End"></Label>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" >
+                <Label x:Name="LabelSwitchTossDecision"  TextColor="ForestGreen"  Style="{DynamicResource LabelStyle}" VerticalOptions="End" HorizontalOptions="EndAndExpand"></Label>
+                <Switch x:Name="SwitchTossDecision" VerticalOptions="End" Toggled="SwitchTossDecision_OnToggled"></Switch>
+            </StackLayout>
+            <Button Text="Submit" Style="{DynamicResource Button}" Clicked="OnTossSubmitClicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+    
+    

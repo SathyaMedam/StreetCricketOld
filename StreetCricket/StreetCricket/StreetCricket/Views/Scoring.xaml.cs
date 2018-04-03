@@ -17,7 +17,7 @@ namespace StreetCricket.Views
         {
             InitializeComponent();
         }
-        public Scoring(CricketMatch cricketMatch)
+        public Scoring(CricketMatch cricketMatch):this()
         {
             _cricketMatch = cricketMatch;
             InitializeComponent();
