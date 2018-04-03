@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StreetCricket.Views.ScoringMasterPage"
+             xmlns:pages="clr-namespace:StreetCricket.Views">
+  <MasterDetailPage.Master>
+      <ContentPage Title="Master Page">
+          <ContentPage.Content>
+              <StackLayout>
+                  <Button Text="Coin Toss" Style="{DynamicResource Button}"></Button>
+                  <Button Text="Start Innings" Style="{DynamicResource Button}"></Button>
+                  <Button Text="End Innings" Style="{DynamicResource Button}"></Button>
+              </StackLayout>
+          </ContentPage.Content>
+      </ContentPage>
+    </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <NavigationPage>
+      <x:Arguments>
+        <pages:Scoring />
+      </x:Arguments>
+    </NavigationPage>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>

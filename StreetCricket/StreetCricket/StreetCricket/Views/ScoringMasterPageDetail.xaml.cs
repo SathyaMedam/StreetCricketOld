@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace StreetCricket.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterDetailPage1Detail : ContentPage
+    public partial class ScoringMasterPageDetail : ContentPage
     {
-        public MasterDetailPage1Detail()
+        public ScoringMasterPageDetail()
         {
             InitializeComponent();
         }
