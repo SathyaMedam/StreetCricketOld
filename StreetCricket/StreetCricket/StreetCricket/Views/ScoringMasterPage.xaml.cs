@@ -21,15 +21,6 @@ namespace StreetCricket.Views
             InitializeComponent();
             this.cricketMatch = cricketMatch;
         }
-
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-           
-            IsPresented = false;
-
-          //  MasterPage.ListView.SelectedItem = null;
-        }
-
         private void OnCoinTossClicked(object sender, EventArgs e)
 
         {
@@ -39,17 +30,25 @@ namespace StreetCricket.Views
 
         private void OnStartInningsClicked(object sender, EventArgs e)
         {
+            cricketMatch.StartInnings();
             IsPresented = false;
         }
 
         private void OnEndInningsClicked(object sender, EventArgs e)
         {
+            cricketMatch.EndInnings();
             IsPresented = false;
         }
 
         private void OnScoringClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new Scoring(this.cricketMatch));
+            IsPresented = false;
+        }
+
+        private void OnSelectPlayersClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new SelectPlayersPage(this.cricketMatch));
             IsPresented = false;
         }
     }

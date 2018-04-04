@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CricketLIbrary.Model;
 using CricketLIbrary.Model.Implementations;
 using Xamarin.Forms;

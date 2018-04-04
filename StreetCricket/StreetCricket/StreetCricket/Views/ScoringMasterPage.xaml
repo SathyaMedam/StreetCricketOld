@@ -8,6 +8,7 @@
           <ContentPage.Content>
               <StackLayout>
                   <Button Text="Coin Toss" Style="{DynamicResource Button}" Clicked="OnCoinTossClicked"></Button>
+                    <Button Text="Select Players" Style="{DynamicResource Button}" Clicked="OnSelectPlayersClicked"></Button>
                   <Button Text="Start Innings" Style="{DynamicResource Button}" Clicked="OnStartInningsClicked"></Button>
                   <Button Text="End Innings" Style="{DynamicResource Button}" Clicked="OnEndInningsClicked"></Button>
                   <Button Text="Scoring" Style="{DynamicResource Button}" Clicked="OnScoringClicked"></Button>
