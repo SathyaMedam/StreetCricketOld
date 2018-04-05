@@ -18,7 +18,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <pages:Scoring />
+                <pages:ScoringMasterPageDetail />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

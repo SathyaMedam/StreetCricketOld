@@ -51,7 +51,7 @@ namespace StreetCricket.Views
                 LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) - 1).ToString();
             }
 
-            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == _cricketMatch.CricketMatchProperties.NumberOfPlayersPerTeam)
+            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == 3)
             {
                 LblNumberOfSelectedPlayers.TextColor = Color.ForestGreen;
                 ButtonFinished.IsEnabled = true;
