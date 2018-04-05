@@ -20,20 +20,24 @@ namespace StreetCricket.Views
         {
             InitializeComponent();
             this.cricketMatch = cricketMatch;
+            BindingContext = cricketMatch;
+            LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
+            LabelSwitchTossDecision.Text = "Bat First";
         }
 
         private void SwitchTossTeam_OnToggled(object sender, ToggledEventArgs e)
 	    {
 	        if (e.Value)
 	        {
-	            LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
-	            cricketMatch.Toss.TeamWonToss = cricketMatch.HomeTeam;
-
+	           
+ LabelSwitchTossTeam.Text = cricketMatch.AwayTeam.Name;
+	            cricketMatch.Toss.TeamWonToss = cricketMatch.AwayTeam;
 	        }
 	        else
 	        {
-	            LabelSwitchTossTeam.Text = cricketMatch.AwayTeam.Name;
-	            cricketMatch.Toss.TeamWonToss = cricketMatch.AwayTeam;
+	            LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
+	            cricketMatch.Toss.TeamWonToss = cricketMatch.HomeTeam;
+               
             }
         }
 
@@ -41,15 +45,16 @@ namespace StreetCricket.Views
 	    {
 	        if (e.Value)
 	        {
-	            LabelSwitchTossTeam.Text = "Bat First";
-	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Batting;
+	            LabelSwitchTossDecision.Text = "Bowl First";
+	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Bowling;
+                
 
             }
 	        else
 	        {
-	            LabelSwitchTossTeam.Text = "Bowl First";
-	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Bowling;
-	        }
+	            LabelSwitchTossDecision.Text = "Bat First";
+	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Batting;
+            }
         }
 
 	    private void OnTossSubmitClicked(object sender, EventArgs e)

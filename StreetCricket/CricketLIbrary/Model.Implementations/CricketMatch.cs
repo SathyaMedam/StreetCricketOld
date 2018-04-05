@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CricketLIbrary.Model.Implementations
 {
@@ -13,50 +10,52 @@ namespace CricketLIbrary.Model.Implementations
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
         public Toss Toss { get; set; }
+        public Match Match { get; set; }
+        public CricketMatchProperties CricketMatchProperties { get; set; }
 
         public CricketMatch(Match match)
         {
+            Match = match;
             Innings = new List<Innings>();
-            Toss=new Toss();
+            Toss = new Toss { TeamWonToss = match.HomeTeam, TossDecisionType = TossDecisionType.Batting };
             HomeTeam = match.HomeTeam;
             AwayTeam = match.AwayTeam;
         }
         public CricketMatch GetMatch(Match match)
         {
-            CricketMatch cricketMatch = new CricketMatch(match);
-            var innings1 = new Innings
-            {
-                InningsTeam = match.HomeTeam,
-                Overs = new List<Over>(),
-                InningsStatus = InningsStatus.InProgress,
-                InningsNumber = 1,
-
-            };
-            var striker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 1);
-            innings1.Striker = new CricketPlayer(striker);
-            var nonStriker = match.HomeTeam.Players.FirstOrDefault(x => x.Id == 2);
-            innings1.NonStriker = new CricketPlayer(nonStriker);
-            innings1.Runs = innings1.Overs.SelectMany(x => x.Balls).Sum(y => y.Runs.RunsScored);
-            var innings2 = new Innings
-            {
-                InningsTeam = match.AwayTeam,
-                InningsStatus = InningsStatus.NotStarted,
-                Overs = new List<Over>(),
-                InningsNumber = 2
-            };
-            innings2.Runs = innings2.Overs.SelectMany(x => x.Balls).Sum(y => y.Runs.RunsScored);
-
-            cricketMatch.Innings = new List<Innings> { innings1, innings2 };
-          
+            CricketMatch cricketMatch = new CricketMatch(match) { CricketMatchProperties = match.CricketMatchProperties };
             return cricketMatch;
+        }
+
+        public void AddPlayersToTeam(List<int> selectdPlayerIds, bool isHomeTeam)
+        {
+            if (isHomeTeam)
+            {
+                foreach (var selectdPlayerId in selectdPlayerIds)
+                {
+                    var player = this.Match.HomePlayers.FirstOrDefault(x => x.Id == selectdPlayerId);
+                    var cricketPlayer = new CricketPlayer(player);
+                    this.HomeTeam.Players.Add(cricketPlayer);
+                }
+            }
+            else
+            {
+                foreach (var selectdPlayerId in selectdPlayerIds)
+                {
+                    var player = this.Match.HomePlayers.FirstOrDefault(x => x.Id == selectdPlayerId);
+                    var cricketPlayer = new CricketPlayer(player);
+                    this.AwayTeam.Players.Add(cricketPlayer);
+                }
+            }
+
         }
 
         public void CoinToss()
         {
+            var firstInnings = this.Innings.FirstOrDefault();
+            var secondInnings = this.Innings.LastOrDefault();
             if (this.Toss.TeamWonToss == HomeTeam)
             {
-                var firstInnings = this.Innings.FirstOrDefault();
-                var secondInnings = this.Innings.LastOrDefault();
                 if (this.Toss.TossDecisionType == TossDecisionType.Batting)
                 {
 
@@ -67,6 +66,20 @@ namespace CricketLIbrary.Model.Implementations
                 {
                     if (firstInnings != null) firstInnings.InningsTeam = AwayTeam;
                     if (secondInnings != null) secondInnings.InningsTeam = HomeTeam;
+                }
+            }
+            else
+            {
+                if (this.Toss.TossDecisionType == TossDecisionType.Batting)
+                {
+
+                    if (firstInnings != null) firstInnings.InningsTeam = AwayTeam;
+                    if (secondInnings != null) secondInnings.InningsTeam = HomeTeam;
+                }
+                else
+                {
+                    if (firstInnings != null) firstInnings.InningsTeam = HomeTeam;
+                    if (secondInnings != null) secondInnings.InningsTeam = AwayTeam;
                 }
             }
         }

@@ -9,6 +9,7 @@ namespace CricketLIbrary.Model.Implementations
     public interface ICricketMatch
     {
         CricketMatch GetMatch(Match match);
+        void AddPlayersToTeam(List<int> selectdPlayerIds, bool isHomeTeam);
         void CoinToss();
         void StartOver(Innings currentInnings, CricketPlayer bowler);
         void EndOver(Over currentOver);

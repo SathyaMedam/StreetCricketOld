@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StreetCricket.SelectPlayersPage">
+             x:Class="StreetCricket.Views.MultiSelectHomePlayersPage">
     <ContentPage.Content>
+
         <ListView x:Name="PlayersListView" ItemsSource="{Binding DataList}" Margin="20">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -15,13 +16,19 @@
                             <StackLayout VerticalOptions="CenterAndExpand">
                                 <Label Text="{Binding Data.Name}" FontSize="20" />
                             </StackLayout>
-                            <Switch IsToggled="{Binding Selected}" Grid.Column="1" />
+                            <Switch IsToggled="{Binding Selected}" Grid.Column="1" Toggled="Switch_OnToggled"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <Button Text="Finished" Clicked="OnFinishedClicked" />
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="LblPlayerText" Text="" HorizontalOptions="StartAndExpand"></Label> 
+                        <Label x:Name="LblNumberOfSelectedPlayers" Text="0" Style="{DynamicResource LabelBoldPositive}" HorizontalOptions="End"></Label>
+                    </StackLayout>
+                    <Button Text="Finished" Clicked="OnFinishedClicked" />
+                </StackLayout>
             </ListView.Footer>
         </ListView>
     </ContentPage.Content>

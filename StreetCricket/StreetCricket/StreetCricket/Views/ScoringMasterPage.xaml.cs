@@ -48,7 +48,7 @@ namespace StreetCricket.Views
 
         private void OnSelectPlayersClicked(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new SelectPlayersPage(this.cricketMatch));
+            Detail = new NavigationPage(new MultiSelectHomePlayersPage(this.cricketMatch));
             IsPresented = false;
         }
     }

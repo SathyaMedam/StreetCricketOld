@@ -13,7 +13,14 @@
             <Style x:Key="BackgroundStyle" TargetType="VisualElement">
                 <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}" />
             </Style>
-
+            <Style x:Key="LabelBoldPositive" TargetType="Button">
+                <Setter Property="TextColor" Value="ForestGreen" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+            <Style x:Key="LabelGray" TargetType="Button">
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
             <!--Round Buttons-->
             <Style x:Key="PlainButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="RoyalBlue"/>

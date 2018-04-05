@@ -9,6 +9,8 @@ namespace CricketLIbrary.Model
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
         public string MatchName { get; set; }
+        public List<Player> HomePlayers { get; set; }
+        public List<Player> AwayPlayers { get; set; }
         public CricketMatchProperties CricketMatchProperties { get; set; }  
 
     }

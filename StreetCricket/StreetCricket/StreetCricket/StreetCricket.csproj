@@ -29,13 +29,19 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\MultiSelectAwayPlayersPage.xaml.cs">
+      <DependentUpon>MultiSelectAwayPlayersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MultiSelectHomePlayersPage.xaml.cs">
+      <DependentUpon>MultiSelectHomePlayersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MatchList.xaml.cs">
       <DependentUpon>MatchList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="SelectPlayersPage.xaml">
+    <EmbeddedResource Update="Views\MultiSelectHomePlayersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CoinTossPage.xaml">

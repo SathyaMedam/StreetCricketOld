@@ -87,6 +87,27 @@ namespace CricketLIbrary.Data
                 TeamId = 1
 
             };
+            var player11 = new Player
+            {
+                Id = 12,
+                Name = "Tobie",
+                TeamId = 1
+
+            };
+            var player12 = new Player
+            {
+                Id = 13,
+                Name = "Ross",
+                TeamId = 1
+
+            };
+            var player13 = new Player
+            {
+                Id = 14,
+                Name = "Spencer",
+                TeamId = 1
+
+            };
 
             var aPlayer = new Player
             {
@@ -166,9 +187,30 @@ namespace CricketLIbrary.Data
                 TeamId = 2
 
             };
+            var aPlayer11 = new Player
+            {
+                Id = 12,
+                Name = "Away Tobie",
+                TeamId = 2
 
-            var homePlayer = new List<Player> { player, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10 };
-            var awayPlayer = new List<Player> { aPlayer, aPlayer1, aPlayer2, aPlayer3, aPlayer4, aPlayer5, aPlayer6, aPlayer7, aPlayer8, aPlayer9, aPlayer10 };
+            };
+            var aPlayer12 = new Player
+            {
+                Id = 13,
+                Name = "Away Ross",
+                TeamId = 2
+
+            };
+            var aPlayer13 = new Player
+            {
+                Id = 14,
+                Name = "Away Spencer",
+                TeamId = 2
+
+            };
+
+            var homePlayer = new List<Player> { player, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13 };
+            var awayPlayer = new List<Player> { aPlayer, aPlayer1, aPlayer2, aPlayer3, aPlayer4, aPlayer5, aPlayer6, aPlayer7, aPlayer8, aPlayer9, aPlayer1, aPlayer11, aPlayer12, aPlayer13 };
             var match1 = new Match
             {
 
@@ -179,17 +221,19 @@ namespace CricketLIbrary.Data
                     Id = 1,
                     Name = "IND",
                     Venue = Venue.Home,
-                    Players = homePlayer
+                    
                 },
                 AwayTeam = new Team
                 {
                     Id = 2,
                     Name = "AUS",
                     Venue = Venue.Away,
-                    Players = awayPlayer
                 },
 
-            }; match1.MatchName = match1.HomeTeam.Name + " v " + match1.AwayTeam.Name;
+            };
+            match1.HomePlayers = homePlayer;
+            match1.AwayPlayers = awayPlayer;
+            match1.MatchName = match1.HomeTeam.Name + " v " + match1.AwayTeam.Name;
             var match2 = new Match
             {
                 MatchId = 2,
