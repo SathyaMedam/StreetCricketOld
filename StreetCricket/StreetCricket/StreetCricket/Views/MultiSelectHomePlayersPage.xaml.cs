@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CricketLIbrary.Model;
 using CricketLIbrary.Model.Implementations;
 using StreetCricket.Model;
 using Xamarin.Forms;
@@ -33,40 +32,35 @@ namespace StreetCricket.Views
             DataList = playersList;
             PlayersListView.ItemsSource = DataList;
         }
-       
+
         private void OnFinishedClicked(object sender, EventArgs e)
         {
             var selectedPlayers = DataList.Where(x => x.Selected).ToList();
-            _cricketMatch.AddPlayersToTeam(selectedPlayers.Select(x=>x.Data.Id).ToList(), true);
+            _cricketMatch.AddPlayersToTeam(selectedPlayers.Select(x => x.Data.Id).ToList(), true);
             Navigation.PushModalAsync(new MultiSelectAwayPlayersPage(_cricketMatch));
-           
-
         }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)
         {
             if (e.Value)
             {
-                LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text)+1).ToString();
-                
+                LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) + 1).ToString();
             }
             else
             {
-               LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text)- 1).ToString();
+                LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) - 1).ToString();
             }
 
-            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text)> _cricketMatch.CricketMatchProperties.NumberOfPlayersPerTeam)
+            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == _cricketMatch.CricketMatchProperties.NumberOfPlayersPerTeam)
             {
-                LblPlayerText.Text = "More than required palyers are selected";
-                LblPlayerText.TextColor = Color.IndianRed;
+                LblNumberOfSelectedPlayers.TextColor = Color.ForestGreen;
+                ButtonFinished.IsEnabled = true;
             }
             else
             {
-                LblPlayerText.Text = "Please Select 11 Players";
-                LblPlayerText.TextColor = Color.Gray;
+                LblNumberOfSelectedPlayers.TextColor = Color.IndianRed;
+                ButtonFinished.IsEnabled = false;
             }
         }
-
-       
     }
 }

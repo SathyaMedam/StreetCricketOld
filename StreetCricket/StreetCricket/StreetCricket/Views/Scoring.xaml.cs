@@ -10,27 +10,25 @@ namespace StreetCricket.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Scoring : ContentPage
     {
-        
+
         private readonly CricketMatch _cricketMatch;
 
         public Scoring()
         {
             InitializeComponent();
         }
-        public Scoring(CricketMatch cricketMatch):this()
+        public Scoring(CricketMatch cricketMatch, bool isEnabled) : this()
         {
             _cricketMatch = cricketMatch;
             InitializeComponent();
-            
+            IsEnabled = isEnabled;
         }
 
         private void OnStartOverClicked(object sender, EventArgs e)
         {
             var bowler = _cricketMatch.AwayTeam.Players.FirstOrDefault();
-            _cricketMatch.StartOver(_cricketMatch.CurrentInnings, new CricketPlayer(bowler)); 
+            _cricketMatch.StartOver(_cricketMatch.CurrentInnings, new CricketPlayer(bowler));
         }
-
-       
 
         private void OnEndOverClicked(object sender, EventArgs e)
         {
@@ -40,16 +38,6 @@ namespace StreetCricket.Views
         private void UpdateScoreBoard()
         {
             LblHomeTeamScore.Text = _cricketMatch.CurrentInnings.Overs.SelectMany(x => x.Balls).Sum(x => x.Runs.TotalRuns).ToString();
-        }
-
-        private void OnStartInningsClicked(object sender, EventArgs e)
-        {
-            _cricketMatch.StartInnings();
-        }
-
-        private void OnEndInningsClicked(object sender, EventArgs e)
-        {
-            _cricketMatch.EndInnings();
         }
 
         private void On0RunClicked(object sender, EventArgs e)
@@ -87,8 +75,8 @@ namespace StreetCricket.Views
 
         private void OnWicketClicked(object sender, EventArgs e)
         {
-           AddDismissalOfBall(0,0,BallType.Legitimate, _cricketMatch.CurrentInnings.Striker, _cricketMatch.CurrentInnings.CurrentOver.Bowler,
-               DisMissalType.Caught);
+            AddDismissalOfBall(0, 0, BallType.Legitimate, _cricketMatch.CurrentInnings.Striker, _cricketMatch.CurrentInnings.CurrentOver.Bowler,
+                DisMissalType.Caught);
         }
 
         private void OnWideClicked(object sender, EventArgs e)
@@ -125,12 +113,12 @@ namespace StreetCricket.Views
         {
             var runs = new Runs { RunsScored = runsScored };
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Legitimate, runs,
-                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker,false,null,null, DisMissalType.None);
+                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
             UpdateScoreBoard();
         }
         private void AddExtrasOfBall(int runsScored, int extrasScored, BallType ballType)
         {
-            var runs = new Runs { RunsScored = runsScored, Extras = extrasScored};
+            var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
             UpdateScoreBoard();
@@ -139,7 +127,7 @@ namespace StreetCricket.Views
         {
             var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
-                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true,dismissedPlayer,feilder,disMissalType);
+                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true, dismissedPlayer, feilder, disMissalType);
             UpdateScoreBoard();
         }
     }

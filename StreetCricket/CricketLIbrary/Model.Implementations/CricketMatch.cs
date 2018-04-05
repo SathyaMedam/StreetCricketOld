@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace CricketLIbrary.Model.Implementations
 {
@@ -12,6 +13,7 @@ namespace CricketLIbrary.Model.Implementations
         public Toss Toss { get; set; }
         public Match Match { get; set; }
         public CricketMatchProperties CricketMatchProperties { get; set; }
+        public int MatchInningsNumber { get; set; }
 
         public CricketMatch(Match match)
         {
@@ -50,38 +52,10 @@ namespace CricketLIbrary.Model.Implementations
 
         }
 
-        public void CoinToss()
+        public void CoinToss(Team teamWon, TossDecisionType decisionType)
         {
-            var firstInnings = this.Innings.FirstOrDefault();
-            var secondInnings = this.Innings.LastOrDefault();
-            if (this.Toss.TeamWonToss == HomeTeam)
-            {
-                if (this.Toss.TossDecisionType == TossDecisionType.Batting)
-                {
-
-                    if (firstInnings != null) firstInnings.InningsTeam = HomeTeam;
-                    if (secondInnings != null) secondInnings.InningsTeam = AwayTeam;
-                }
-                else
-                {
-                    if (firstInnings != null) firstInnings.InningsTeam = AwayTeam;
-                    if (secondInnings != null) secondInnings.InningsTeam = HomeTeam;
-                }
-            }
-            else
-            {
-                if (this.Toss.TossDecisionType == TossDecisionType.Batting)
-                {
-
-                    if (firstInnings != null) firstInnings.InningsTeam = AwayTeam;
-                    if (secondInnings != null) secondInnings.InningsTeam = HomeTeam;
-                }
-                else
-                {
-                    if (firstInnings != null) firstInnings.InningsTeam = HomeTeam;
-                    if (secondInnings != null) secondInnings.InningsTeam = AwayTeam;
-                }
-            }
+            this.Toss.TeamWonToss = teamWon;
+            this.Toss.TossDecisionType = decisionType;
         }
 
         public void StartOver(Innings currentInnings, CricketPlayer bowler)
@@ -97,8 +71,6 @@ namespace CricketLIbrary.Model.Implementations
             currentOver.OverStauts = OverStatus.OverFinished;
         }
 
-
-
         public void EndInnings()
         {
             this.CurrentInnings.InningsStatus = InningsStatus.Finished;
@@ -106,10 +78,46 @@ namespace CricketLIbrary.Model.Implementations
 
         public void StartInnings()
         {
-            var completedInnings = this.Innings.Count(x => x.InningsStatus == InningsStatus.Finished);
-            this.CurrentInnings = this.Innings.FirstOrDefault(x => x.InningsNumber == completedInnings + 1);
-            var currentInnings = this.CurrentInnings;
-            if (currentInnings != null) currentInnings.InningsStatus = InningsStatus.InProgress;
+            this.MatchInningsNumber = MatchInningsNumber + 1;
+
+            if (MatchInningsNumber == 1)
+            {
+                var innings = new Innings
+                {
+                    InningsNumber = 1,
+                    InningsStatus = InningsStatus.InProgress
+                };
+                if (this.Toss.TeamWonToss == HomeTeam)
+                {
+                    innings.BattingTeam = this.Toss.TossDecisionType == TossDecisionType.Batting ? HomeTeam : AwayTeam;
+                }
+                else
+                {
+                    innings.BattingTeam = this.Toss.TossDecisionType == TossDecisionType.Batting ? AwayTeam : HomeTeam;
+                }
+                this.CurrentInnings = innings;
+                this.Innings.Add(innings);
+
+            }
+            else
+            {
+                var finishedInnings = this.Innings.FirstOrDefault();
+                var innings = new Innings
+                {
+                    InningsNumber = 1,
+                    InningsStatus = InningsStatus.InProgress
+                };
+                if (finishedInnings != null && finishedInnings.BattingTeam == HomeTeam)
+                {
+                    innings.BattingTeam = AwayTeam;
+                }
+                else
+                {
+                    innings.BattingTeam = HomeTeam;
+                }
+                this.CurrentInnings = innings;
+                this.Innings.Add(innings);
+            }
         }
 
         public void AddBall(Over currentOver, BallType ballType, Runs runs, CricketPlayer bowler, CricketPlayer batsmen, bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
@@ -125,7 +133,7 @@ namespace CricketLIbrary.Model.Implementations
                 if (isDismissal)
                 {
                     dismissedPlayer.Dismissed = true;
-                    CurrentInnings.Striker = new CricketPlayer(CurrentInnings.InningsTeam.Players.FirstOrDefault(x => x.Id == 3));
+                    CurrentInnings.Striker = new CricketPlayer(CurrentInnings.BattingTeam.Players.FirstOrDefault(x => x.Id == 3));
                 }
 
 

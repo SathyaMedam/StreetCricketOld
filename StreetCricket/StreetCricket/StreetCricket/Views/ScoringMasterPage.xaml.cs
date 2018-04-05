@@ -8,12 +8,11 @@ namespace StreetCricket.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScoringMasterPage : MasterDetailPage
     {
-        private CricketMatch cricketMatch;
+        private readonly CricketMatch cricketMatch;
 
         public ScoringMasterPage()
         {
             InitializeComponent();
-          
         }
 
         public ScoringMasterPage(CricketMatch cricketMatch)
@@ -22,15 +21,15 @@ namespace StreetCricket.Views
             this.cricketMatch = cricketMatch;
         }
         private void OnCoinTossClicked(object sender, EventArgs e)
-
         {
-            Detail=new NavigationPage(new CoinTossPage(this.cricketMatch));
+            Detail = new NavigationPage(new CoinTossPage(this.cricketMatch));
             IsPresented = false;
         }
 
         private void OnStartInningsClicked(object sender, EventArgs e)
         {
             cricketMatch.StartInnings();
+            Detail = new NavigationPage(new SelectStrikerAndNonStrikerPage(this.cricketMatch));
             IsPresented = false;
         }
 
@@ -39,13 +38,6 @@ namespace StreetCricket.Views
             cricketMatch.EndInnings();
             IsPresented = false;
         }
-
-        private void OnScoringClicked(object sender, EventArgs e)
-        {
-            Detail = new NavigationPage(new Scoring(this.cricketMatch));
-            IsPresented = false;
-        }
-
         private void OnSelectPlayersClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new MultiSelectHomePlayersPage(this.cricketMatch));

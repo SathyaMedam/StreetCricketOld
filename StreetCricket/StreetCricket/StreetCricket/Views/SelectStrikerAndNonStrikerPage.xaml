@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StreetCricket.Views.MultiSelectAwayPlayersPage">
+             x:Class="StreetCricket.Views.SelectStrikerAndNonStrikerPage">
     <ContentPage.Content>
 
         <ListView x:Name="PlayersListView" ItemsSource="{Binding DataList}" Margin="20">
@@ -24,7 +24,7 @@
             <ListView.Footer>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="LblPlayerText" Text="Please Select 11 Players"  Style="{DynamicResource LabelGray}" HorizontalOptions="StartAndExpand"></Label>
+                        <Label x:Name="LblPlayerText" Text="Please Select 2 Players"  Style="{DynamicResource LabelGray}" HorizontalOptions="StartAndExpand"></Label>
                         <Label x:Name="LblNumberOfSelectedPlayers" Text="0" Style="{DynamicResource LabelBoldPositive}" HorizontalOptions="End"></Label>
                     </StackLayout>
                     <Button x:Name="ButtonFinished" Text="Finished"  Style="{DynamicResource Button}" Clicked="OnFinishedClicked" IsEnabled="False"/>

@@ -24,10 +24,10 @@
             <ListView.Footer>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="LblPlayerText" Text="" HorizontalOptions="StartAndExpand"></Label> 
+                        <Label x:Name="LblPlayerText" Text="Please Select 11 Players"  Style="{DynamicResource LabelGray}" HorizontalOptions="StartAndExpand"></Label>
                         <Label x:Name="LblNumberOfSelectedPlayers" Text="0" Style="{DynamicResource LabelBoldPositive}" HorizontalOptions="End"></Label>
                     </StackLayout>
-                    <Button Text="Finished" Clicked="OnFinishedClicked" />
+                    <Button x:Name="ButtonFinished" Text="Finished"  Style="{DynamicResource Button}" Clicked="OnFinishedClicked" IsEnabled="False"/>
                 </StackLayout>
             </ListView.Footer>
         </ListView>

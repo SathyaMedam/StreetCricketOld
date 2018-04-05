@@ -6,15 +6,16 @@ using Xamarin.Forms.Xaml;
 
 namespace StreetCricket.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CoinTossPage : ContentPage
-	{
-        private CricketMatch cricketMatch;
-
-        public CoinTossPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CoinTossPage : ContentPage
+    {
+        private readonly CricketMatch cricketMatch;
+        private Team TeamWon;
+        public TossDecisionType TossDecisionType;
+        public CoinTossPage()
+        {
+            InitializeComponent();
+        }
 
         public CoinTossPage(CricketMatch cricketMatch)
         {
@@ -26,41 +27,37 @@ namespace StreetCricket.Views
         }
 
         private void SwitchTossTeam_OnToggled(object sender, ToggledEventArgs e)
-	    {
-	        if (e.Value)
-	        {
-	           
- LabelSwitchTossTeam.Text = cricketMatch.AwayTeam.Name;
-	            cricketMatch.Toss.TeamWonToss = cricketMatch.AwayTeam;
-	        }
-	        else
-	        {
-	            LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
-	            cricketMatch.Toss.TeamWonToss = cricketMatch.HomeTeam;
-               
+        {
+            if (e.Value)
+            {
+                LabelSwitchTossTeam.Text = cricketMatch.AwayTeam.Name;
+                TeamWon = cricketMatch.AwayTeam;
+            }
+            else
+            {
+                LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
+                TeamWon = cricketMatch.HomeTeam;
             }
         }
 
-	    private void SwitchTossDecision_OnToggled(object sender, ToggledEventArgs e)
-	    {
-	        if (e.Value)
-	        {
-	            LabelSwitchTossDecision.Text = "Bowl First";
-	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Bowling;
-                
-
+        private void SwitchTossDecision_OnToggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                LabelSwitchTossDecision.Text = "Bowl First";
+                TossDecisionType = TossDecisionType.Bowling;
             }
-	        else
-	        {
-	            LabelSwitchTossDecision.Text = "Bat First";
-	            cricketMatch.Toss.TossDecisionType = TossDecisionType.Batting;
+            else
+            {
+                LabelSwitchTossDecision.Text = "Bat First";
+                TossDecisionType = TossDecisionType.Batting;
             }
         }
 
-	    private void OnTossSubmitClicked(object sender, EventArgs e)
-	    {
-	        cricketMatch.CoinToss();
-	        Navigation.PushModalAsync(new ScoringMasterPage(cricketMatch));
+        private void OnTossSubmitClicked(object sender, EventArgs e)
+        {
+            cricketMatch.CoinToss(TeamWon, TossDecisionType);
+            Navigation.PushModalAsync(new ScoringMasterPage(cricketMatch));
         }
-	}
+    }
 }

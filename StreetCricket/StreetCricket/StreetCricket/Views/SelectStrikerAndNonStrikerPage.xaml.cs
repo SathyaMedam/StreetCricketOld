@@ -9,22 +9,22 @@ using Xamarin.Forms.Xaml;
 namespace StreetCricket.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MultiSelectAwayPlayersPage : ContentPage
+    public partial class SelectStrikerAndNonStrikerPage : ContentPage
     {
         private readonly CricketMatch _cricketMatch;
         public List<SelectableData<SelectPlayerData>> DataList { get; set; }
 
-        public MultiSelectAwayPlayersPage()
+        public SelectStrikerAndNonStrikerPage()
         {
             InitializeComponent();
         }
 
-        public MultiSelectAwayPlayersPage(CricketMatch cricketMatch)
+        public SelectStrikerAndNonStrikerPage(CricketMatch cricketMatch)
         {
             InitializeComponent();
             this._cricketMatch = cricketMatch;
             var playersList = new List<SelectableData<SelectPlayerData>>();
-            foreach (var data in cricketMatch.Match.AwayPlayers)
+            foreach (var data in cricketMatch.CurrentInnings.BattingTeam.Players)
                 playersList.Add(new SelectableData<SelectPlayerData>
                 {
                     Data = new SelectPlayerData { Id = data.Id, Name = data.Name }
@@ -37,7 +37,7 @@ namespace StreetCricket.Views
         {
             var selectedPlayers = DataList.Where(x => x.Selected).ToList();
             _cricketMatch.AddPlayersToTeam(selectedPlayers.Select(x => x.Data.Id).ToList(), false);
-            Navigation.PushModalAsync(new ScoringMasterPage(_cricketMatch));
+            Navigation.PushModalAsync(new Scoring(_cricketMatch, true));
         }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)
@@ -51,7 +51,7 @@ namespace StreetCricket.Views
                 LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) - 1).ToString();
             }
 
-            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == _cricketMatch.CricketMatchProperties.NumberOfPlayersPerTeam)
+            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == 2)
             {
                 LblNumberOfSelectedPlayers.TextColor = Color.ForestGreen;
                 ButtonFinished.IsEnabled = true;
@@ -62,5 +62,7 @@ namespace StreetCricket.Views
                 ButtonFinished.IsEnabled = false;
             }
         }
+
+
     }
 }
