@@ -2,24 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StreetCricket.Views.Scoring"
-             Style="{DynamicResource BackgroundStyle}" IsEnabled="False">
+             Style="{DynamicResource BackgroundStyle}">
     <ContentPage.Content>
-        <Grid x:Name="ControlGrid" RowSpacing="1" ColumnSpacing="1" Padding="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="180" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Vertical" Spacing="10">
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="LayoutMain" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Vertical" Padding="10" IsEnabled="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label x:Name="LblHomeTeamName" Text="INDIA" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
                     <Label x:Name="LblAwayTeamName" Text="AUSTRALIA" Style="{DynamicResource LabelStyle}"  HorizontalTextAlignment="End" HorizontalOptions="EndAndExpand"></Label>
@@ -84,33 +71,57 @@
                     </Grid>
                 </StackLayout>
             </StackLayout>
-            <Button x:Name="Btn0Runs" Text = "0" Grid.Row="1" Grid.Column="0" Style="{DynamicResource DarkerButton}" Clicked="On0RunClicked"></Button>
-            <Button x:Name="Btn1Run" Text = "1" Grid.Row="1" Grid.Column="1" Style="{DynamicResource DarkerButton}" Clicked="On1RunClicked"></Button>
-            <Button x:Name="Btn2Runs" Text = "2" Grid.Row="1" Grid.Column="2" Style="{DynamicResource DarkerButton}" Clicked="On2RunClicked"></Button>
-            <Button x:Name="Btn3Runs" Text = "3" Grid.Row="1" Grid.Column="3" Style="{DynamicResource DarkerButton}" Clicked="On3RunClicked"></Button>
-
-            <Button x:Name="Btn4Runs" Text = "4" Grid.Row="2" Grid.Column="0" Style="{DynamicResource PlainButton}" Clicked="On4RunClicked"></Button>
-            <Button x:Name="Btn4PlusRuns" Text = "4" Grid.Row="2" Grid.Column="1" Style="{DynamicResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
-            <Button x:Name="Btn6Runs" Text = "6" Grid.Row="2" Grid.Column="2" Style="{DynamicResource PlainButton}" Clicked="On6RunClicked"></Button>
-            <Button x:Name="BtnWicket" Text = "W" Grid.Row="2" Grid.Column="3" Style="{DynamicResource PlainButton}" Clicked="OnWicketClicked"></Button>
-            <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="Btn0Runs" Text = "0" Style="{DynamicResource DarkerButton}" Clicked="On0RunClicked"></Button>
+                <Button x:Name="Btn1Run" Text = "1" Style="{DynamicResource DarkerButton}" Clicked="On1RunClicked"></Button>
+                <Button x:Name="Btn2Runs" Text = "2" Style="{DynamicResource DarkerButton}" Clicked="On2RunClicked"></Button>
+                <Button x:Name="Btn3Runs" Text = "3" Style="{DynamicResource DarkerButton}" Clicked="On3RunClicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="Btn4Runs" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4RunClicked"></Button>
+                <Button x:Name="Btn4PlusRuns" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
+                <Button x:Name="Btn6Runs" Text = "6" Style="{DynamicResource PlainButton}" Clicked="On6RunClicked"></Button>
+                <Button x:Name="BtnWicket" Text = "W" Style="{DynamicResource PlainButton}" Clicked="OnWicketClicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
                 <Button x:Name="BtnWide" Text = "WD" Style="{DynamicResource OrangeButton}" Clicked="OnWideClicked"></Button>
                 <Button x:Name="BtnNoBall" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallClicked"></Button>
                 <Button x:Name="BtnNoBallBat" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallBatClicked"></Button>
-
-
             </StackLayout>
-            <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal">
                 <Button x:Name="BtnByes" Text = "By"  Style="{DynamicResource OrangeButton}"  Clicked="OnByesClicked"></Button>
                 <Button x:Name="BtnLegByes" Text = "LB" Style="{DynamicResource OrangeButton}"  Clicked="OnLegByesClicked"></Button>
                 <Button x:Name="BtnDeadBall" Text = "XX" Style="{DynamicResource OrangeButton}"  Clicked="OnDeadBallClicked"></Button>
-
             </StackLayout>
-            <Button x:Name="BtnStartOver" Text = "St Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="0" Style="{DynamicResource PlainButton}" Clicked="OnStartOverClicked"></Button>
-            <Button  x:Name="BtnEndOver" Text = "End Over" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="2" Style="{DynamicResource PlainButton}" Clicked="OnEndOverClicked"></Button>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="BtnStartOver" Text = "St Over" Style="{DynamicResource PlainButton}" Clicked="OnStartOverClicked"></Button>
+                <Button  x:Name="BtnEndOver" Text = "End Over" Style="{DynamicResource PlainButton}" Clicked="OnEndOverClicked"></Button>
+            </StackLayout>
+        </StackLayout>
+            <StackLayout x:Name="LayoutWides" IsVisible="True" 
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1" BackgroundColor="DarkOliveGreen"  Opacity="0.9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
 
-        </Grid>
+                <StackLayout VerticalOptions="FillAndExpand"  Padding="20, 100, 20, 100" Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Button x:Name="BtnWide0" Text = "WD0" Style="{DynamicResource DarkerButton}" Clicked="OnWide0Clicked"></Button>
+                        <Button x:Name="BtnWide1" Text = "WD1" Style="{DynamicResource DarkerButton}" Clicked="OnWide1Clicked"></Button>
+                        <Button x:Name="BtnWide2" Text = "WD2" Style="{DynamicResource DarkerButton}" Clicked="OnWide2Clicked"></Button>
+                        <Button x:Name="BtnWide3" Text = "WD3" Style="{DynamicResource DarkerButton}" Clicked="OnWide3Clicked"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Button x:Name="BtnWide4" Text = "WD4" Style="{DynamicResource PlainButton}" Clicked="OnWide4Clicked"></Button>
+                        <Button x:Name="BtnWide5" Text = "WD4" Style="{DynamicResource PlainButton}" Clicked="OnWide5Clicked"></Button>
+                        <Button x:Name="BtnWide6" Text = "WD6" Style="{DynamicResource PlainButton}" Clicked="OnWide6Clicked"></Button>
+                        <Button x:Name="BtnWide7" Text = "WD7" Style="{DynamicResource PlainButton}" Clicked="OnWide7Clicked"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+        </AbsoluteLayout>
 
     </ContentPage.Content>
 </ContentPage>
 
+
+  

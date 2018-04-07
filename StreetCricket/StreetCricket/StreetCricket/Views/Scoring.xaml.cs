@@ -21,7 +21,8 @@ namespace StreetCricket.Views
         {
             _cricketMatch = cricketMatch;
             InitializeComponent();
-            IsEnabled = isEnabled;
+            LayoutMain.IsEnabled = isEnabled;
+            LayoutWides.IsVisible = false;
         }
 
         private void OnStartOverClicked(object sender, EventArgs e)
@@ -89,7 +90,8 @@ namespace StreetCricket.Views
 
         private void OnWideClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LayoutWides.IsVisible = true;
+
         }
 
         private void OnNoBallClicked(object sender, EventArgs e)
@@ -129,7 +131,7 @@ namespace StreetCricket.Views
             //var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
             //_cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
             //    _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
-            UpdateScoreBoard();
+           
         }
         private void AddDismissalOfBall(int runsScored, int extrasScored, BallType ballType, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
         {
@@ -137,6 +139,46 @@ namespace StreetCricket.Views
             //_cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
             //    _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true, dismissedPlayer, feilder, disMissalType);
             UpdateScoreBoard();
+        }
+        private void OnWide0Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(0);
+        }
+        private void OnWide1Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(1);
+        }
+        private void OnWide2Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(2);
+        }
+        private void OnWide3Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(3);
+        }
+        private void OnWide4Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(4);
+        }
+        private void OnWide5Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(5);
+        }
+        private void OnWide6Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(6);
+        }
+        private void OnWide7Clicked(object sender, EventArgs e)
+        {
+            AddExtrasOfBall(7);
+        }
+
+        private void AddExtrasOfBall(int runsScored)
+        {
+            _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Wide, RunsType.Wide, BoundaryType.None, runsScored,
+                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
+           UpdateScoreBoard();
+            LayoutWides.IsVisible = false;
         }
     }
 }
