@@ -37,7 +37,15 @@ namespace StreetCricket.Views
 
         private void UpdateScoreBoard()
         {
-            LblHomeTeamScore.Text = _cricketMatch.CurrentInnings.Overs.SelectMany(x => x.Balls).Sum(x => x.Runs.TotalRuns).ToString();
+            var homeScoredCard = _cricketMatch.GetTeamInningsScoreCard(true, 1);
+
+            LblHomeTeamRuns.Text = homeScoredCard.TotalRuns.ToString();
+            LblHomeTeamWickets.Text = homeScoredCard.Wickets.ToString();
+            LblHomeTeamOvers.Text = homeScoredCard.Overs;
+            var awayScoredCard = _cricketMatch.GetTeamInningsScoreCard(false, 1);
+            LblAwayTeamRuns.Text = awayScoredCard.TotalRuns.ToString();
+            LblAwayTeamWickets.Text = awayScoredCard.Wickets.ToString();
+            LblAwayTeamOvers.Text = awayScoredCard.Overs;
         }
 
         private void On0RunClicked(object sender, EventArgs e)
@@ -111,23 +119,23 @@ namespace StreetCricket.Views
 
         private void AddRunsOfBall(int runsScored)
         {
-            var runs = new Runs { RunsScored = runsScored };
-            _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Legitimate, runs,
+
+            _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Legitimate, RunsType.Run, BoundaryType.None, runsScored,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
             UpdateScoreBoard();
         }
         private void AddExtrasOfBall(int runsScored, int extrasScored, BallType ballType)
         {
-            var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
-            _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
-                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
+            //var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
+            //_cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
+            //    _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
             UpdateScoreBoard();
         }
         private void AddDismissalOfBall(int runsScored, int extrasScored, BallType ballType, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
         {
-            var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
-            _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
-                _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true, dismissedPlayer, feilder, disMissalType);
+            //var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
+            //_cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
+            //    _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true, dismissedPlayer, feilder, disMissalType);
             UpdateScoreBoard();
         }
     }

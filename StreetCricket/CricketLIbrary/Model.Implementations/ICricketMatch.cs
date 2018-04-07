@@ -11,11 +11,8 @@ namespace CricketLIbrary.Model.Implementations
         CricketMatch GetMatch(Match match);
         void AddPlayersToTeam(List<int> selectdPlayerIds, bool isHomeTeam);
         void CoinToss(Team teamWon, TossDecisionType decisionType);
-        void StartOver(Innings currentInnings, CricketPlayer bowler);
-        void EndOver(Over currentOver);
-        void AddBall(Over currentOver, BallType ballType, Runs runs, CricketPlayer bowler, CricketPlayer batsmen,
-            bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType);
         void EndInnings();
         void StartInnings();
+        Innings GetInningsOfATeam(bool isHomeTeam, int teamInningsNUmber);
     }
 }

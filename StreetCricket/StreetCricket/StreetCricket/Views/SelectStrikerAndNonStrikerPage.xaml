@@ -5,6 +5,9 @@
     <ContentPage.Content>
 
         <ListView x:Name="PlayersListView" ItemsSource="{Binding DataList}" Margin="20">
+            <ListView.Header>
+                <Label x:Name="LblStrikerNonStrikerText" Text="STRIKER"  Style="{DynamicResource LabelGray}" HorizontalOptions="CenterAndExpand"></Label>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

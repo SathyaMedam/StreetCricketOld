@@ -8,10 +8,12 @@ namespace CricketLIbrary.Model
         public int Number { get; set; }
         public OverStatus OverStauts { get; set; }
         public CricketPlayer Bowler { get; set; }
+        public Ball CurrentBall { get; set; }
 
         public Over()
         {
             Balls=new List<Ball>();
+            CurrentBall=new Ball();
         }
     }
     

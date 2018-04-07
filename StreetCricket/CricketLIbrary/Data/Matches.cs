@@ -209,8 +209,10 @@ namespace CricketLIbrary.Data
 
             };
 
-            var homePlayer = new List<Player> { player, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13 };
-            var awayPlayer = new List<Player> { aPlayer, aPlayer1, aPlayer2, aPlayer3, aPlayer4, aPlayer5, aPlayer6, aPlayer7, aPlayer8, aPlayer9, aPlayer1, aPlayer11, aPlayer12, aPlayer13 };
+            var homePlayer = new List<Player> { player, player1, player2, player3, player4, player5};
+                //, player6, player7, player8, player9, player10, player11, player12, player13 };
+            var awayPlayer = new List<Player> { aPlayer, aPlayer1, aPlayer2, aPlayer3, aPlayer4, aPlayer5};
+            //, aPlayer6, aPlayer7, aPlayer8, aPlayer9, aPlayer1, aPlayer11, aPlayer12, aPlayer13 };
             var match1 = new Match
             {
 

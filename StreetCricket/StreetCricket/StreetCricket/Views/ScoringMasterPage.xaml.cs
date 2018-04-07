@@ -29,10 +29,9 @@ namespace StreetCricket.Views
         private void OnStartInningsClicked(object sender, EventArgs e)
         {
             cricketMatch.StartInnings();
-            Detail = new NavigationPage(new SelectStrikerAndNonStrikerPage(this.cricketMatch));
+            Detail = new NavigationPage(new SelectStrikerAndNonStrikerPage(this.cricketMatch, true));
             IsPresented = false;
         }
-
         private void OnEndInningsClicked(object sender, EventArgs e)
         {
             cricketMatch.EndInnings();
@@ -42,6 +41,13 @@ namespace StreetCricket.Views
         {
             Detail = new NavigationPage(new MultiSelectHomePlayersPage(this.cricketMatch));
             IsPresented = false;
+        }
+
+        private void OnMainScoringClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new Scoring(this.cricketMatch, true));
+            IsPresented = false;
+
         }
     }
 }
