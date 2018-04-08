@@ -44,7 +44,7 @@ namespace CricketLIbrary.Model.Implementations
             {
                 foreach (var selectdPlayerId in selectdPlayerIds)
                 {
-                    var player = this.Match.HomePlayers.FirstOrDefault(x => x.Id == selectdPlayerId);
+                    var player = this.Match.AwayPlayers.FirstOrDefault(x => x.Id == selectdPlayerId);
                     var cricketPlayer = new CricketPlayer(player);
                     this.AwayTeam.Players.Add(cricketPlayer);
                 }

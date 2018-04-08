@@ -24,6 +24,8 @@ namespace StreetCricket.Views
             BindingContext = cricketMatch;
             LabelSwitchTossTeam.Text = cricketMatch.HomeTeam.Name;
             LabelSwitchTossDecision.Text = "Bat First";
+            TeamWon = cricketMatch.HomeTeam;
+            TossDecisionType = TossDecisionType.Batting;
         }
 
         private void SwitchTossTeam_OnToggled(object sender, ToggledEventArgs e)

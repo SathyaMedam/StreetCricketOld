@@ -28,10 +28,19 @@ namespace StreetCricket.Views
             this._isStrikerPage = isStrikerPage;
             var playersList = new List<SelectableData<SelectPlayerData>>();
             foreach (var data in cricketMatch.CurrentInnings.BattingTeam.Players)
-                playersList.Add(new SelectableData<SelectPlayerData>
+            {
+                var strikerId = cricketMatch.CurrentInnings.Striker?.Id ?? 0;
+                var nonStrikerId = cricketMatch.CurrentInnings.NonStriker?.Id ?? 0;
+                if (strikerId != data.Id && nonStrikerId != data.Id)
                 {
-                    Data = new SelectPlayerData { Id = data.Id, Name = data.Name }
-                });
+                    playersList.Add(new SelectableData<SelectPlayerData>
+                    {
+                        Data = new SelectPlayerData { Id = data.Id, Name = data.Name }
+                    });
+                }
+
+            }
+
             DataList = playersList;
             PlayersListView.ItemsSource = DataList;
             LblStrikerNonStrikerText.Text = isStrikerPage ? "STRIKER" : "NON STRIKER";
