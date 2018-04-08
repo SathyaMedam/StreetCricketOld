@@ -8,11 +8,9 @@ namespace CricketLIbrary.Model
 {
     public class CricketPlayer : Player
     {
-        public int RunsScored { get; set; }
-        public int BallsFaced { get; set; }
-        public DateTime TimeAtCrease { get; set; }
-        public int NumberOfFours { get; set; }
-        public int NumberOfSixers { get; set; }
+        public bool IsCaptian { get; set; }
+        public bool IsWicketKeeper { get; set; }
+        
         public int OversBowled { get; set; }
         public int BallsBowled { get; set; }
         public int RunsConceded { get; set; }

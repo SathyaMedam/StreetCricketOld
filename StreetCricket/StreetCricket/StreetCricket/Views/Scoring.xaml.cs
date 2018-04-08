@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using CricketLIbrary.Model;
 using CricketLIbrary.Model.Implementations;
@@ -64,7 +65,6 @@ namespace StreetCricket.Views
         private void UpdateScoreBoard()
         {
             var homeScoredCard = _cricketMatch.GetTeamInningsScoreCard(true, 1);
-
             LblHomeTeamRuns.Text = homeScoredCard.TotalRuns.ToString();
             LblHomeTeamWickets.Text = homeScoredCard.Wickets.ToString();
             LblHomeTeamOvers.Text = homeScoredCard.Overs;
@@ -72,6 +72,22 @@ namespace StreetCricket.Views
             LblAwayTeamRuns.Text = awayScoredCard.TotalRuns.ToString();
             LblAwayTeamWickets.Text = awayScoredCard.Wickets.ToString();
             LblAwayTeamOvers.Text = awayScoredCard.Overs;
+            var batsmen1ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.Striker.Id);
+            LblStrikerName.Text = _cricketMatch.CurrentInnings.Striker.Name;
+            LblStrikerRuns.Text = batsmen1ScoreCard.TotalRuns.ToString();
+            LblStrikerBalls.Text = batsmen1ScoreCard.BallsFaced.ToString();
+            LblStrikerFours.Text = batsmen1ScoreCard.NumberOfFours.ToString();
+            LblStrikerSixers.Text = batsmen1ScoreCard.NumberOfSixers.ToString();
+            LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
+            LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
+            var batsmen2ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.NonStriker.Id);
+            LblNonStrikerName.Text= _cricketMatch.CurrentInnings.NonStriker.Name;
+            LblNonStrikerRuns.Text = batsmen2ScoreCard.TotalRuns.ToString();
+            LblNonStrikerBalls.Text = batsmen2ScoreCard.BallsFaced.ToString();
+            LblNonStrikerFours.Text = batsmen2ScoreCard.NumberOfFours.ToString();
+            LblNonStrikerSixers.Text = batsmen2ScoreCard.NumberOfSixers.ToString();
+            LblNonStrikerZeros.Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
+            LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
         }
 
         private void On0RunClicked(object sender, EventArgs e)

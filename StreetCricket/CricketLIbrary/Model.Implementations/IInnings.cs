@@ -14,5 +14,6 @@ namespace CricketLIbrary.Model.Implementations
             bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType);
         void SetStrikerNonStrikerBatsmen(int batsmenId, bool isStriker);
         TeamInningsScoreCard GetTeamInningsScoreCard(bool isHomeTeam,  int teamInningsNumber);
+        BattingScoreCard GetBattingScoreCard(bool isHomeTeam, int teamInningsNumber, int playerId);
     }
 }

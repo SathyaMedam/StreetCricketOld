@@ -45,6 +45,7 @@
     <Compile Include="Model.Implementations\ICricketMatch.cs" />
     <Compile Include="Model.Implementations\IInnings.cs" />
     <Compile Include="Model\Ball.cs" />
+    <Compile Include="Model\BattingScoreCard.cs" />
     <Compile Include="Model\CricketMatchProperties.cs" />
     <Compile Include="Model\CricketMatchState.cs" />
     <Compile Include="Model\CricketPlayer.cs" />

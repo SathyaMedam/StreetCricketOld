@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CricketLIbrary.Model
+{
+    public class BattingScoreCard
+    {
+        public int Runs { get; set; }
+        public int BallsFaced { get; set; }
+        public DateTime TimeAtCrease { get; set; }
+        public int NumberOfDotBalls { get; set; }
+        public int NumberOfFours { get; set; }
+        public int NumberOfSixers { get; set; }
+        public int TotalRuns => Runs + (NumberOfFours * 4) + (NumberOfSixers * 6);
+        public double StrikeRate
+        {
+            get
+            {
+                if (BallsFaced>0)
+                {
+                    return (TotalRuns / BallsFaced) * 100;
+                }
+
+                return 0.0;
+            }
+        }
+    }
+}
