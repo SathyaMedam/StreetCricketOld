@@ -8,7 +8,7 @@ namespace CricketLIbrary.Model.Implementations
 {
     public interface IInnings
     {
-        void StartOver(Innings currentInnings, CricketPlayer bowler);
+        void StartOver(Innings currentInnings, int bowlerId);
         void EndOver(Over currentOver);
         void AddBall(Over currentOver, BallType ballType, RunsType runsType, BoundaryType boundaryType, int runs, CricketPlayer bowler, CricketPlayer batsmen,
             bool isDismissal, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType);

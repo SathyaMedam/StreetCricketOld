@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CricketLIbrary.Model;
 using CricketLIbrary.Model.Implementations;
+using StreetCricket.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +12,7 @@ namespace StreetCricket.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Scoring : ContentPage
     {
-
+        public List<SelectableData<SelectPlayerData>> DataList { get; set; }
         private readonly CricketMatch _cricketMatch;
 
         public Scoring()
@@ -25,10 +27,33 @@ namespace StreetCricket.Views
             LayoutWides.IsVisible = false;
         }
 
+        private void PopulateBolwerListview()
+        {
+            var playersList = new List<SelectableData<SelectPlayerData>>();
+            foreach (var data in _cricketMatch.CurrentInnings.BowlingTeam.Players)
+            {
+                var strikerId = _cricketMatch.CurrentInnings.Striker?.Id ?? 0;
+                var nonStrikerId = _cricketMatch.CurrentInnings.NonStriker?.Id ?? 0;
+                if (strikerId != data.Id && nonStrikerId != data.Id)
+                {
+                    playersList.Add(new SelectableData<SelectPlayerData>
+                    {
+                        Data = new SelectPlayerData { Id = data.Id, Name = data.Name }
+                    });
+                }
+
+            }
+
+            DataList = playersList;
+            PlayersListView.ItemsSource = DataList;
+        }
+
+
+
         private void OnStartOverClicked(object sender, EventArgs e)
         {
-            var bowler = _cricketMatch.AwayTeam.Players.FirstOrDefault();
-            _cricketMatch.StartOver(_cricketMatch.CurrentInnings, new CricketPlayer(bowler));
+            PopulateBolwerListview();
+            LayoutBowler.IsVisible = true;
         }
 
         private void OnEndOverClicked(object sender, EventArgs e)
@@ -131,7 +156,7 @@ namespace StreetCricket.Views
             //var runs = new Runs { RunsScored = runsScored, Extras = extrasScored };
             //_cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runs,
             //    _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
-           
+
         }
         private void AddDismissalOfBall(int runsScored, int extrasScored, BallType ballType, CricketPlayer dismissedPlayer, CricketPlayer feilder, DisMissalType disMissalType)
         {
@@ -177,8 +202,38 @@ namespace StreetCricket.Views
         {
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Wide, RunsType.Wide, BoundaryType.None, runsScored,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
-           UpdateScoreBoard();
+            UpdateScoreBoard();
             LayoutWides.IsVisible = false;
+        }
+
+        private void Switch_OnToggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) + 1).ToString();
+            }
+            else
+            {
+                LblNumberOfSelectedPlayers.Text = (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) - 1).ToString();
+            }
+
+            if (Convert.ToInt32(LblNumberOfSelectedPlayers.Text) == 1)
+            {
+                LblNumberOfSelectedPlayers.TextColor = Color.ForestGreen;
+                ButtonFinished.IsEnabled = true;
+            }
+            else
+            {
+                LblNumberOfSelectedPlayers.TextColor = Color.IndianRed;
+                ButtonFinished.IsEnabled = false;
+            }
+        }
+
+        private void OnFinishedClicked(object sender, EventArgs e)
+        {
+            var selectedPlayerId = DataList.Where(x => x.Selected).ToList().FirstOrDefault().Data.Id;
+            _cricketMatch.StartOver(_cricketMatch.CurrentInnings, selectedPlayerId);
+            LayoutBowler.IsVisible = false;
         }
     }
 }

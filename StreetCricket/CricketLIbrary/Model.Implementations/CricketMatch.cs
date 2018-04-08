@@ -58,9 +58,10 @@ namespace CricketLIbrary.Model.Implementations
             this.Toss.TossDecisionType = decisionType;
         }
 
-        public void StartOver(Innings currentInnings, CricketPlayer bowler)
+        public void StartOver(Innings currentInnings, int bowlerId)
         {
-            var over = new Over { OverStauts = OverStatus.OverInProgress, Bowler = (CricketPlayer)bowler };
+            var player = this.CurrentInnings.BowlingTeam.Players.FirstOrDefault(x => x.Id == bowlerId);
+            var over = new Over { OverStauts = OverStatus.OverInProgress, Bowler = player };
             over.Number = over.Number + 1;
             currentInnings.CurrentOver = over;
             currentInnings.Overs.Add(over);
