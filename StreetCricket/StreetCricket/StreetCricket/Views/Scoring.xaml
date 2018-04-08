@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:StreetCricket.Views;assembly=StreetCricket"
              x:Class="StreetCricket.Views.Scoring"
              Style="{DynamicResource BackgroundStyle}">
     <ContentPage.Content>
@@ -98,10 +99,9 @@
                 <Button  x:Name="BtnEndOver" Text = "End Over" Style="{DynamicResource PlainButton}" Clicked="OnEndOverClicked"></Button>
             </StackLayout>
         </StackLayout>
-            <StackLayout x:Name="LayoutWides" IsVisible="True" 
+            <StackLayout x:Name="LayoutWides" IsVisible="False" 
                          AbsoluteLayout.LayoutFlags="PositionProportional"
                          AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1" BackgroundColor="DarkOliveGreen"  Opacity="0.9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-
                 <StackLayout VerticalOptions="FillAndExpand"  Padding="20, 100, 20, 100" Orientation="Vertical">
                     <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <Button x:Name="BtnWide0" Text = "WD0" Style="{DynamicResource DarkerButton}" Clicked="OnWide0Clicked"></Button>

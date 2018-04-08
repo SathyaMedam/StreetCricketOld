@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace StreetCricket.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class WidePopupPage : ContentPage
+	public partial class WidePopupPage : ContentView
 	{
         private CricketMatch _cricketMatch;
 

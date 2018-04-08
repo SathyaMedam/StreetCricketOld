@@ -215,7 +215,6 @@ namespace CricketLIbrary.Model.Implementations
             {
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished) + 1;
                 ball.BallAttemptNumber = 1;
-                batsmen.RunsScored += runs;
                 ball.IsFinished = true;
                 if (isDismissal)
                 {
@@ -226,14 +225,22 @@ namespace CricketLIbrary.Model.Implementations
             }
             if (ball.BallType == BallType.Wide)
             {
-                ball.Extras = this.CricketMatchProperties.WideValue;
+                ball.Extras = this.CricketMatchProperties.WideValue + runs;
                 ball.BallAttemptNumber = ball.BallAttemptNumber + 1;
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished);
 
             }
             if (ball.BallType == BallType.NoBall)
             {
-                ball.Extras = this.CricketMatchProperties.NoBallValue;
+                if (ball.RunsType == RunsType.Run)
+                {
+                    ball.Extras = this.CricketMatchProperties.NoBallValue;
+                    ball.Runs = runs;
+                }
+                else
+                {
+                    ball.Extras = this.CricketMatchProperties.NoBallValue + runs;
+                }
                 ball.BallAttemptNumber = ball.BallAttemptNumber + 1;
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished);
             }
@@ -270,15 +277,15 @@ namespace CricketLIbrary.Model.Implementations
 
             if (innings != null)
             {
-                var runs = innings.Overs.SelectMany(x => x.Balls).Sum(x => x.Runs + x.Extras);
+                var runs = innings.Overs.SelectMany(x => x.Balls).Sum(x => x.Runs);
                 var wickets = innings.Overs.SelectMany(x => x.Balls).Count(x => x.IsDismissal);
                 var wides = innings.Overs.SelectMany(x => x.Balls).Count(x => x.BallType == BallType.Wide);
-                var wideRuns = innings.Overs.SelectMany(x => x.Balls).Where(x => x.BallType == BallType.Wide).Sum(c => c.Runs + c.Extras);
+                var wideRuns = innings.Overs.SelectMany(x => x.Balls).Where(x => x.BallType == BallType.Wide).Sum(c => c.Extras);
                 var noBalls = innings.Overs.SelectMany(x => x.Balls).Count(x => x.BallType == BallType.NoBall);
-                var noBallRuns = innings.Overs.SelectMany(x => x.Balls).Where(x => x.BallType == BallType.NoBall).Sum(c => c.Runs + c.Extras);
+                var noBallRuns = innings.Overs.SelectMany(x => x.Balls).Where(x => x.BallType == BallType.NoBall).Sum(c => c.Extras);
                 var byes = innings.Overs.SelectMany(x => x.Balls).Where(x => x.RunsType == RunsType.Byes).Sum(y => y.Runs);
                 var legByes = innings.Overs.SelectMany(x => x.Balls).Where(x => x.RunsType == RunsType.LegByes).Sum(y => y.Runs);
-                var overs = innings.Overs.Count()-1 + "." + Enumerable.LastOrDefault(innings.Overs).Balls.Count();
+                var overs = innings.Overs.Count() - 1 + "." + Enumerable.LastOrDefault(innings.Overs).Balls.Count(x => x.IsFinished);
                 var teamInningsScoreCard = new TeamInningsScoreCard
                 {
                     Runs = runs,

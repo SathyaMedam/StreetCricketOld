@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StreetCricket.Views.WidePopupPage"
-             Style="{DynamicResource BackgroundStyle}"
-             Title="Wode Popup">
-
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20, 20, 20, 20">
-            <StackLayout Orientation="Horizontal">
+             Style="{DynamicResource BackgroundStyle}">
+    <StackLayout IsVisible="False" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1" BackgroundColor="DarkOliveGreen"  Opacity="0.9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <StackLayout VerticalOptions="FillAndExpand"  Padding="20, 100, 20, 100" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Button x:Name="BtnWide0" Text = "WD0" Style="{DynamicResource DarkerButton}" Clicked="OnWide0Clicked"></Button>
                 <Button x:Name="BtnWide1" Text = "WD1" Style="{DynamicResource DarkerButton}" Clicked="OnWide1Clicked"></Button>
                 <Button x:Name="BtnWide2" Text = "WD2" Style="{DynamicResource DarkerButton}" Clicked="OnWide2Clicked"></Button>
                 <Button x:Name="BtnWide3" Text = "WD3" Style="{DynamicResource DarkerButton}" Clicked="OnWide3Clicked"></Button>
-            </StackLayout>                          
-            <StackLayout Orientation="Horizontal">  
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Button x:Name="BtnWide4" Text = "WD4" Style="{DynamicResource PlainButton}" Clicked="OnWide4Clicked"></Button>
                 <Button x:Name="BtnWide5" Text = "WD4" Style="{DynamicResource PlainButton}" Clicked="OnWide5Clicked"></Button>
                 <Button x:Name="BtnWide6" Text = "WD6" Style="{DynamicResource PlainButton}" Clicked="OnWide6Clicked"></Button>
                 <Button x:Name="BtnWide7" Text = "WD7" Style="{DynamicResource PlainButton}" Clicked="OnWide7Clicked"></Button>
-            </StackLayout>                           
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </StackLayout>
+</ContentView>
