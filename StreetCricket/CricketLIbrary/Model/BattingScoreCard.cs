@@ -21,7 +21,7 @@ namespace CricketLIbrary.Model
             {
                 if (BallsFaced>0)
                 {
-                    return (TotalRuns / BallsFaced) * 100;
+                    return (TotalRuns* 100 )/ BallsFaced ;
                 }
 
                 return 0.0;

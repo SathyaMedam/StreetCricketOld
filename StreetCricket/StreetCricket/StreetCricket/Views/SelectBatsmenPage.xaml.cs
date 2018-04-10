@@ -50,7 +50,7 @@ namespace StreetCricket.Views
 
             _cricketMatch.SetBatsmenComingOn(selectedPlayerId);
 
-            Navigation.PushModalAsync(new Scoring(_cricketMatch, true));
+            Navigation.PushModalAsync(new ScoringMasterPage(_cricketMatch));
         }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)

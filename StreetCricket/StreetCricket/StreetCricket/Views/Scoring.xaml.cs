@@ -118,7 +118,7 @@ namespace StreetCricket.Views
             LblStrikerFours.Text = batsmen1ScoreCard.NumberOfFours.ToString();
             LblStrikerSixers.Text = batsmen1ScoreCard.NumberOfSixers.ToString();
             LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
-            LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
+            LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString("#.##");
             }
             else
             {
@@ -134,7 +134,7 @@ namespace StreetCricket.Views
                 LblNonStrikerFours.Text = batsmen2ScoreCard.NumberOfFours.ToString();
                 LblNonStrikerSixers.Text = batsmen2ScoreCard.NumberOfSixers.ToString();
                 LblNonStrikerZeros.Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
-                LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
+                LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString("#.##"); 
             }
             else
             {

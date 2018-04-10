@@ -221,12 +221,6 @@ namespace CricketLIbrary.Model.Implementations
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished) + 1;
                 ball.BallAttemptNumber = 1;
                 ball.IsFinished = true;
-                if (isDismissal)
-                {
-                    dismissedPlayer.Dismissed = true;
-                    CurrentInnings.Striker = null;
-                }
-
             }
             if (ball.BallType == BallType.Wide)
             {
@@ -250,14 +244,33 @@ namespace CricketLIbrary.Model.Implementations
                 ball.BallNumber = currentOver.Balls.Count(x => x.IsFinished);
             }
 
+            if (dismissedPlayer!=null)
+            {
+                 dismissedPlayer.Dismissed = isDismissal;
+            }
+           
             currentOver.Balls.Add(ball);
             currentOver.CurrentBall = ball;
+          
+
             var striker = this.CurrentInnings.Striker;
             var nonStriker = this.CurrentInnings.NonStriker;
             if (IsOdd(ball.Runs))
             {
                 this.CurrentInnings.Striker = nonStriker;
                 this.CurrentInnings.NonStriker = striker;
+            }
+            if (isDismissal)
+            {
+                if (dismissedPlayer.Id==striker.Id)
+                {
+                     CurrentInnings.Striker = null;
+                }
+                else
+                {
+                    CurrentInnings.NonStriker = null;
+                }
+               
             }
         }
         public static bool IsOdd(int value)
@@ -280,7 +293,7 @@ namespace CricketLIbrary.Model.Implementations
         public void SetBatsmenComingOn(int selectdPlayerId)
         {
             var player = this.CurrentInnings.BattingTeam.Players.FirstOrDefault(x => x.Id == selectdPlayerId);
-            if (this.CurrentInnings.Striker==null)
+            if (this.CurrentInnings.Striker == null)
             {
                 this.CurrentInnings.Striker = player;
             }
@@ -298,13 +311,13 @@ namespace CricketLIbrary.Model.Implementations
             {
                 var ballsInInnings = innings.Overs.SelectMany(x => x.Balls).ToList();
                 var runs = ballsInInnings.Sum(x => x.Runs);
-                var wickets =ballsInInnings.Count(x => x.IsDismissal);
-                var wides =ballsInInnings.Count(x => x.BallType == BallType.Wide);
-                var wideRuns =ballsInInnings.Where(x => x.BallType == BallType.Wide).Sum(c => c.Extras);
-                var noBalls =ballsInInnings.Count(x => x.BallType == BallType.NoBall);
-                var noBallRuns =ballsInInnings.Where(x => x.BallType == BallType.NoBall).Sum(c => c.Extras);
-                var byes =ballsInInnings.Where(x => x.RunsType == RunsType.Byes).Sum(y => y.Runs);
-                var legByes =ballsInInnings.Where(x => x.RunsType == RunsType.LegByes).Sum(y => y.Runs);
+                var wickets = ballsInInnings.Count(x => x.IsDismissal);
+                var wides = ballsInInnings.Count(x => x.BallType == BallType.Wide);
+                var wideRuns = ballsInInnings.Where(x => x.BallType == BallType.Wide).Sum(c => c.Extras);
+                var noBalls = ballsInInnings.Count(x => x.BallType == BallType.NoBall);
+                var noBallRuns = ballsInInnings.Where(x => x.BallType == BallType.NoBall).Sum(c => c.Extras);
+                var byes = ballsInInnings.Where(x => x.RunsType == RunsType.Byes).Sum(y => y.Runs);
+                var legByes = ballsInInnings.Where(x => x.RunsType == RunsType.LegByes).Sum(y => y.Runs);
                 var balls = 0;
                 if (innings.Overs.LastOrDefault()?.Balls != null)
                 {
@@ -335,12 +348,12 @@ namespace CricketLIbrary.Model.Implementations
 
             if (innings != null)
             {
-                var ballsFacedInInnings = innings.Overs.SelectMany(x => x.Balls).Where(x=>x.Batsmen.Id==playerId).ToList();
+                var ballsFacedInInnings = innings.Overs.SelectMany(x => x.Balls).Where(x => x.Batsmen.Id == playerId).ToList();
 
                 var runs = ballsFacedInInnings.Sum(x => x.Runs);
                 var ballsFaced = ballsFacedInInnings.Count();
                 var fours = ballsFacedInInnings.Count(x => x.BoundaryType == BoundaryType.Four);
-                var sixers= ballsFacedInInnings.Count(x => x.BoundaryType == BoundaryType.Six);
+                var sixers = ballsFacedInInnings.Count(x => x.BoundaryType == BoundaryType.Six);
                 var dots = ballsFacedInInnings.Count(x => x.Runs == 0);
                 var teamInningsScoreCard = new BattingScoreCard
                 {
