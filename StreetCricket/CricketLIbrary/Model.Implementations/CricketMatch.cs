@@ -275,7 +275,19 @@ namespace CricketLIbrary.Model.Implementations
             {
                 this.CurrentInnings.NonStriker = player;
             }
+        }
 
+        public void SetBatsmenComingOn(int selectdPlayerId)
+        {
+            var player = this.CurrentInnings.BattingTeam.Players.FirstOrDefault(x => x.Id == selectdPlayerId);
+            if (this.CurrentInnings.Striker==null)
+            {
+                this.CurrentInnings.Striker = player;
+            }
+            else
+            {
+                this.CurrentInnings.NonStriker = player;
+            }
         }
 
         public TeamInningsScoreCard GetTeamInningsScoreCard(bool isHomeTeam, int teamInningsNumber)
@@ -293,7 +305,13 @@ namespace CricketLIbrary.Model.Implementations
                 var noBallRuns =ballsInInnings.Where(x => x.BallType == BallType.NoBall).Sum(c => c.Extras);
                 var byes =ballsInInnings.Where(x => x.RunsType == RunsType.Byes).Sum(y => y.Runs);
                 var legByes =ballsInInnings.Where(x => x.RunsType == RunsType.LegByes).Sum(y => y.Runs);
-                var overs = innings.Overs.Count() - 1 + "." + Enumerable.LastOrDefault(innings.Overs).Balls.Count(x => x.IsFinished);
+                var balls = 0;
+                if (innings.Overs.LastOrDefault()?.Balls != null)
+                {
+                    balls = Enumerable.LastOrDefault(innings.Overs).Balls.Count(x => x.IsFinished);
+
+                }
+                var overs = innings.Overs.Count() - 1 + "." + balls;
                 var teamInningsScoreCard = new TeamInningsScoreCard
                 {
                     Runs = runs,

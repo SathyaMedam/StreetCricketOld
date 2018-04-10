@@ -8,30 +8,30 @@
             <StackLayout x:Name="LayoutMain" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Vertical" Padding="10" IsEnabled="False">
                 <StackLayout Orientation="Vertical" Spacing="10">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label x:Name="LblHomeTeamName" Text="INDIA" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
-                        <Label x:Name="LblAwayTeamName" Text="AUSTRALIA" Style="{DynamicResource LabelStyle}"  HorizontalTextAlignment="End" HorizontalOptions="EndAndExpand"></Label>
+                        <Label x:Name="LblHomeTeamName" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
+                        <Label x:Name="LblAwayTeamName" Text="" Style="{DynamicResource LabelStyle}"  HorizontalTextAlignment="End" HorizontalOptions="EndAndExpand"></Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                            <Label x:Name="LblHomeTeamRuns" Text="252" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
+                            <Label x:Name="LblHomeTeamRuns" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
                             <Label  Text="/" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
-                            <Label x:Name="LblHomeTeamWickets" Text="10" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
-                            <Label x:Name="LblHomeTeamOvers" Text="49.5" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
+                            <Label x:Name="LblHomeTeamWickets" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
+                            <Label x:Name="LblHomeTeamOvers" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                            <Label x:Name="LblAwayTeamRuns" Text="252" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="EndAndExpand"></Label>
+                            <Label x:Name="LblAwayTeamRuns" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="EndAndExpand"></Label>
                             <Label  Text="/" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
-                            <Label x:Name="LblAwayTeamWickets" Text="10" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
-                            <Label x:Name="LblAwayTeamOvers" Text="49.5" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
+                            <Label x:Name="LblAwayTeamWickets" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
+                            <Label x:Name="LblAwayTeamOvers" Text="" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start"></Label>
                         </StackLayout>
                     </StackLayout>
                     <StackLayout>
                         <Grid x:Name="ScoreCardGrid" RowSpacing="1" ColumnSpacing="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20" />
-                                <RowDefinition Height="20" />
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" x:Name="RowDefinitionStriker" />
+                                <RowDefinition Height="20" x:Name="RowDefinitionNonStriker"/>
                                 <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -43,6 +43,8 @@
                                 <ColumnDefinition Width="35" />
                                 <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
+                            <BoxView x:Name="BoxViewStriker" Color="DarkRed" Grid.Row="1"  Grid.ColumnSpan="6" IsVisible="False"/>
+                            <BoxView x:Name="BoxViewNonStriker" Color="DarkRed" Grid.Row="2"  Grid.ColumnSpan="6" IsVisible="False"/>
 
                             <Label Grid.Row="0" Grid.Column="0" Text="BATSMEN" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
                             <Label Grid.Row="0" Grid.Column="1" Text=" R " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
@@ -51,47 +53,61 @@
                             <Label Grid.Row="0" Grid.Column="4" Text=" 4s " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label Grid.Row="0" Grid.Column="5" Text=" 6s " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label Grid.Row="0" Grid.Column="6" Text=" SR " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                           
+                            <Label x:Name="LblStrikerName" Grid.Row="1" Grid.Column="0" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
+                            <Label x:Name="LblStrikerRuns" Grid.Row="1" Grid.Column="1" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblStrikerBalls" Grid.Row="1" Grid.Column="2" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblStrikerZeros" Grid.Row="1" Grid.Column="3" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblStrikerFours" Grid.Row="1" Grid.Column="4" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblStrikerSixers" Grid.Row="1" Grid.Column="5" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblStrikerStrikeRate" Grid.Row="1" Grid.Column="6" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
 
-                            <Label x:Name="LblStrikerName" Grid.Row="1" Grid.Column="0" Text=" Sathya" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
-                            <Label x:Name="LblStrikerRuns" Grid.Row="1" Grid.Column="1" Text="10 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblStrikerBalls" Grid.Row="1" Grid.Column="2" Text="20 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblStrikerZeros" Grid.Row="1" Grid.Column="3" Text="5 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblStrikerFours" Grid.Row="1" Grid.Column="4" Text="1 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblStrikerSixers" Grid.Row="1" Grid.Column="5" Text="0 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblStrikerStrikeRate" Grid.Row="1" Grid.Column="6" Text="100.23" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-
-                            <Label x:Name="LblNonStrikerName" Grid.Row="2" Grid.Column="0" Text=" Baz" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
-                            <Label x:Name="LblNonStrikerRuns" Grid.Row="2" Grid.Column="1" Text="5 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblNonStrikerBalls" Grid.Row="2" Grid.Column="2" Text="20 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblNonStrikerZeros" Grid.Row="2" Grid.Column="3" Text="10 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblNonStrikerFours" Grid.Row="2" Grid.Column="4" Text="0 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblNonStrikerSixers" Grid.Row="2" Grid.Column="5" Text="0 " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblNonStrikerStrikeRate" Grid.Row="2" Grid.Column="6" Text="152.30" Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <Label x:Name="LblRecentOvers" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Text="2 | 6 | . |" Style="{DynamicResource LabelStyle}"></Label>
+                            <Label x:Name="LblNonStrikerName" Grid.Row="2" Grid.Column="0" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
+                            <Label x:Name="LblNonStrikerRuns" Grid.Row="2" Grid.Column="1" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblNonStrikerBalls" Grid.Row="2" Grid.Column="2" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblNonStrikerZeros" Grid.Row="2" Grid.Column="3" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblNonStrikerFours" Grid.Row="2" Grid.Column="4" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblNonStrikerSixers" Grid.Row="2" Grid.Column="5" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <Label x:Name="LblNonStrikerStrikeRate" Grid.Row="2" Grid.Column="6" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
+                            <ListView x:Name="LblRecentOvers" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Rotation="360" ItemsSource="{Binding RecentOvers}" RowHeight="40">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <StackLayout>
+                                                    <Label Text="{Binding}" BackgroundColor="DarkOliveGreen"  Opacity="0.9" FontSize="20" />
+                                                </StackLayout>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </Grid>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button x:Name="Btn0Runs" Text = "0" Style="{DynamicResource DarkerButton}" Clicked="On0RunClicked"></Button>
-                    <Button x:Name="Btn1Run" Text = "1" Style="{DynamicResource DarkerButton}" Clicked="On1RunClicked"></Button>
-                    <Button x:Name="Btn2Runs" Text = "2" Style="{DynamicResource DarkerButton}" Clicked="On2RunClicked"></Button>
-                    <Button x:Name="Btn3Runs" Text = "3" Style="{DynamicResource DarkerButton}" Clicked="On3RunClicked"></Button>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button x:Name="Btn4Runs" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4RunClicked"></Button>
-                    <Button x:Name="Btn4PlusRuns" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
-                    <Button x:Name="Btn6Runs" Text = "6" Style="{DynamicResource PlainButton}" Clicked="On6RunClicked"></Button>
-                    <Button x:Name="BtnWicket" Text = "W" Style="{DynamicResource PlainButton}" Clicked="OnWicketClicked"></Button>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button x:Name="BtnWide" Text = "WD" Style="{DynamicResource OrangeButton}" Clicked="OnWideClicked"></Button>
-                    <Button x:Name="BtnNoBall" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallClicked"></Button>
-                    <Button x:Name="BtnNoBallBat" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallBatClicked"></Button>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button x:Name="BtnByes" Text = "By"  Style="{DynamicResource OrangeButton}"  Clicked="OnByesClicked"></Button>
-                    <Button x:Name="BtnLegByes" Text = "LB" Style="{DynamicResource OrangeButton}"  Clicked="OnLegByesClicked"></Button>
-                    <Button x:Name="BtnDeadBall" Text = "XX" Style="{DynamicResource OrangeButton}"  Clicked="OnDeadBallClicked"></Button>
+                <StackLayout x:Name="LayoutScoringButtons">
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="Btn0Runs" Text = "0" Style="{DynamicResource DarkerButton}" Clicked="On0RunClicked"></Button>
+                        <Button x:Name="Btn1Run" Text = "1" Style="{DynamicResource DarkerButton}" Clicked="On1RunClicked"></Button>
+                        <Button x:Name="Btn2Runs" Text = "2" Style="{DynamicResource DarkerButton}" Clicked="On2RunClicked"></Button>
+                        <Button x:Name="Btn3Runs" Text = "3" Style="{DynamicResource DarkerButton}" Clicked="On3RunClicked"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="Btn4Runs" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4RunClicked"></Button>
+                        <Button x:Name="Btn4PlusRuns" Text = "4" Style="{DynamicResource PlainButton}" Clicked="On4PlusRunClicked"></Button>
+                        <Button x:Name="Btn6Runs" Text = "6" Style="{DynamicResource PlainButton}" Clicked="On6RunClicked"></Button>
+                        <Button x:Name="BtnWicket" Text = "W" Style="{DynamicResource PlainButton}" Clicked="OnWicketClicked"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="BtnWide" Text = "WD" Style="{DynamicResource OrangeButton}" Clicked="OnWideClicked"></Button>
+                        <Button x:Name="BtnNoBall" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallClicked"></Button>
+                        <Button x:Name="BtnNoBallBat" Text = "NB" Style="{DynamicResource OrangeButton}" Clicked="OnNoBallBatClicked"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="BtnByes" Text = "By"  Style="{DynamicResource OrangeButton}"  Clicked="OnByesClicked"></Button>
+                        <Button x:Name="BtnLegByes" Text = "LB" Style="{DynamicResource OrangeButton}"  Clicked="OnLegByesClicked"></Button>
+                        <Button x:Name="BtnDeadBall" Text = "XX" Style="{DynamicResource OrangeButton}"  Clicked="OnDeadBallClicked"></Button>
+                    </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="BtnStartOver" Text = "St Over" Style="{DynamicResource PlainButton}" Clicked="OnStartOverClicked"></Button>
@@ -146,7 +162,7 @@
                                     <Label x:Name="LblPlayerText" Text="Please Select 2 Players"  Style="{DynamicResource LabelGray}" HorizontalOptions="StartAndExpand"></Label>
                                     <Label x:Name="LblNumberOfSelectedPlayers" Text="0" Style="{DynamicResource LabelBoldPositive}" HorizontalOptions="End"></Label>
                                 </StackLayout>
-                                <Button x:Name="ButtonFinished" Text="Finished"  Style="{DynamicResource Button}" Clicked="OnFinishedClicked" IsEnabled="False"/>
+                                <Button x:Name="ButtonFinished" Text="Finished"  Style="{DynamicResource Button}" Clicked="OnStartOverFinishedClicked" IsEnabled="False"/>
                             </StackLayout>
                         </ListView.Footer>
                     </ListView>

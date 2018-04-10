@@ -10,7 +10,8 @@
                     <Button Text="Coin Toss" Style="{DynamicResource Button}" Clicked="OnCoinTossClicked"></Button>
                     <Button Text="Select Players" Style="{DynamicResource Button}" Clicked="OnSelectPlayersClicked"></Button>
                     <Button Text="Start Innings" Style="{DynamicResource Button}" Clicked="OnStartInningsClicked"></Button>
-                    <Button Text="Main Scoring" Style="{DynamicResource Button}" Clicked="OnMainScoringClicked"></Button>  
+                    <Button Text="Main Scoring" Style="{DynamicResource Button}" Clicked="OnMainScoringClicked"></Button>
+                    <Button Text="Select Batsmen" Style="{DynamicResource Button}" Clicked="OnSelectBatsmenClicked"></Button>
                     <Button Text="End Innings" Style="{DynamicResource Button}" Clicked="OnEndInningsClicked"></Button>
                 </StackLayout>
             </ContentPage.Content>

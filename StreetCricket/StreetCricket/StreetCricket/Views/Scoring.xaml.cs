@@ -19,19 +19,44 @@ namespace StreetCricket.Views
         public List<CricketPlayer> BattingTeamPlayers { get; set; }
         public CricketPlayer BatsmenOut { get; set; }
         public CricketPlayer Fielder { get; set; }
+        public List<String> RecentOvers { get; set; }
         public RunsType SelectdRunsType { get; set; }
         private readonly CricketMatch _cricketMatch;
 
         public Scoring()
         {
             InitializeComponent();
+            RecentOvers =new List<string>();
         }
         public Scoring(CricketMatch cricketMatch, bool isEnabled) : this()
         {
             _cricketMatch = cricketMatch;
             InitializeComponent();
             LayoutMain.IsEnabled = isEnabled;
+            UpdateScoreBoard();
+        }
+
+        private void UpdateControlState()
+        {
             LayoutWides.IsVisible = false;
+            LblRecentOvers.IsVisible = true;
+            var overStatus = _cricketMatch.CurrentInnings.CurrentOver.OverStauts;
+            if (overStatus == OverStatus.OverInProgress)
+            {
+                LayoutScoringButtons.IsEnabled = true;
+                BtnStartOver.IsEnabled = false;
+                BtnEndOver.IsEnabled = true;
+                LayoutBowler.IsVisible = false;
+            }
+            else
+            {
+               
+                LayoutScoringButtons.IsEnabled = false;
+                BtnStartOver.IsEnabled = true;
+                BtnEndOver.IsEnabled = false;
+            }
+          
+
         }
 
         private void PopulateBolwerListview()
@@ -61,15 +86,21 @@ namespace StreetCricket.Views
         {
             PopulateBolwerListview();
             LayoutBowler.IsVisible = true;
+            UpdateScoreBoard();
         }
 
         private void OnEndOverClicked(object sender, EventArgs e)
         {
             _cricketMatch.EndOver(_cricketMatch.CurrentInnings.CurrentOver);
+            UpdateScoreBoard();
         }
 
         private void UpdateScoreBoard()
         {
+            LblHomeTeamName.Text = _cricketMatch.HomeTeam.Name;
+            LblAwayTeamName.Text = _cricketMatch.AwayTeam.Name;
+            LblRecentOvers.ItemsSource= RecentOvers;
+            RecentOvers.Add(_cricketMatch.CurrentInnings.CurrentOver.Balls.Select(x=>x.Runs).LastOrDefault().ToString());
             var homeScoredCard = _cricketMatch.GetTeamInningsScoreCard(true, 1);
             LblHomeTeamRuns.Text = homeScoredCard.TotalRuns.ToString();
             LblHomeTeamWickets.Text = homeScoredCard.Wickets.ToString();
@@ -89,6 +120,10 @@ namespace StreetCricket.Views
             LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
             LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
             }
+            else
+            {
+               BoxViewStriker.IsVisible=true;
+            }
 
             if (_cricketMatch.CurrentInnings.NonStriker != null)
             {
@@ -101,6 +136,11 @@ namespace StreetCricket.Views
                 LblNonStrikerZeros.Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
                 LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString(CultureInfo.InvariantCulture);
             }
+            else
+            {
+                BoxViewNonStriker.IsVisible = true;
+            }
+            UpdateControlState();
         }
 
         private void On0RunClicked(object sender, EventArgs e)
@@ -256,11 +296,11 @@ namespace StreetCricket.Views
             }
         }
 
-        private void OnFinishedClicked(object sender, EventArgs e)
+        private void OnStartOverFinishedClicked(object sender, EventArgs e)
         {
             var selectedPlayerId = DataList.Where(x => x.Selected).ToList().FirstOrDefault().Data.Id;
             _cricketMatch.StartOver(_cricketMatch.CurrentInnings, selectedPlayerId);
-            LayoutBowler.IsVisible = false;
+            UpdateScoreBoard();
         }
 
         private void OnRunOutClicked(object sender, EventArgs e)

@@ -49,5 +49,11 @@ namespace StreetCricket.Views
             IsPresented = false;
 
         }
+
+        private void OnSelectBatsmenClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new SelectBatsmenPage(this.cricketMatch));
+            IsPresented = false;
+        }
     }
 }

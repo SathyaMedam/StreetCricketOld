@@ -29,6 +29,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SelectBatsmenPage.xaml.cs">
+      <DependentUpon>SelectBatsmenPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SelectStrikerAndNonStrikerPage.xaml.cs">
       <DependentUpon>SelectStrikerAndNonStrikerPage.xaml</DependentUpon>
     </Compile>

@@ -4,7 +4,26 @@
              x:Class="StreetCricket.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="BackgroundColor">BlueViolet</Color>
+
+            <Color
+                x:Key="BackgroundColor">
+                <x:Arguments>
+                    <x:Double>0</x:Double>
+                    <x:Double>0</x:Double>
+                    <x:Double>0</x:Double>
+                    <x:Double>0.75</x:Double>
+                </x:Arguments>
+            </Color>
+            <Color
+                x:Key="Oranged">
+                <x:Arguments>
+                    <x:Double>99</x:Double>
+                    <x:Double>214</x:Double>
+                    <x:Double>250</x:Double>
+                    <x:Double>1</x:Double>
+                </x:Arguments>
+            </Color>
+            <Color x:Key="gdfg">BlueViolet</Color>
             <Color x:Key="TextColor">GhostWhite</Color>
 
             <Style x:Key="LabelStyle" TargetType="Label">
