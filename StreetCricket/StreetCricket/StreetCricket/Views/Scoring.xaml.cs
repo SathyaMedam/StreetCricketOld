@@ -26,7 +26,7 @@ namespace StreetCricket.Views
         public Scoring()
         {
             InitializeComponent();
-            RecentOvers =new List<string>();
+            RecentOvers = new List<string>();
         }
         public Scoring(CricketMatch cricketMatch, bool isEnabled) : this()
         {
@@ -50,12 +50,12 @@ namespace StreetCricket.Views
             }
             else
             {
-               
+
                 LayoutScoringButtons.IsEnabled = false;
                 BtnStartOver.IsEnabled = true;
                 BtnEndOver.IsEnabled = false;
             }
-          
+
 
         }
 
@@ -99,8 +99,14 @@ namespace StreetCricket.Views
         {
             LblHomeTeamName.Text = _cricketMatch.HomeTeam.Name;
             LblAwayTeamName.Text = _cricketMatch.AwayTeam.Name;
-            LblRecentOvers.ItemsSource= RecentOvers;
-            RecentOvers.Add(_cricketMatch.CurrentInnings.CurrentOver.Balls.Select(x=>x.Runs).LastOrDefault().ToString());
+
+            foreach (var run in RecentOvers.Take(12))
+            {
+                var label = new Label { Text = run, TextColor = Color.Black, BackgroundColor = Color.Green, WidthRequest = 20, HeightRequest = 20, HorizontalOptions = LayoutOptions.Center};
+                LblRecentOvers.Children.Add(label);
+            }
+            RecentOvers.Clear();
+
             var homeScoredCard = _cricketMatch.GetTeamInningsScoreCard(true, 1);
             LblHomeTeamRuns.Text = homeScoredCard.TotalRuns.ToString();
             LblHomeTeamWickets.Text = homeScoredCard.Wickets.ToString();
@@ -109,38 +115,39 @@ namespace StreetCricket.Views
             LblAwayTeamRuns.Text = awayScoredCard.TotalRuns.ToString();
             LblAwayTeamWickets.Text = awayScoredCard.Wickets.ToString();
             LblAwayTeamOvers.Text = awayScoredCard.Overs;
-            if (_cricketMatch.CurrentInnings.Striker!=null)
+            if (_cricketMatch.CurrentInnings.Striker != null)
             {
                 var batsmen1ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.Striker.Id);
-            LblStrikerName.Text = _cricketMatch.CurrentInnings.Striker.Name;
-            LblStrikerRuns.Text = batsmen1ScoreCard.TotalRuns.ToString();
-            LblStrikerBalls.Text = batsmen1ScoreCard.BallsFaced.ToString();
-            LblStrikerFours.Text = batsmen1ScoreCard.NumberOfFours.ToString();
-            LblStrikerSixers.Text = batsmen1ScoreCard.NumberOfSixers.ToString();
-            LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
-            LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString("#.##");
+                LblStrikerName.Text = _cricketMatch.CurrentInnings.Striker.Name;
+                LblStrikerRuns.Text = batsmen1ScoreCard.TotalRuns.ToString();
+                LblStrikerBalls.Text = batsmen1ScoreCard.BallsFaced.ToString();
+                LblStrikerFours.Text = batsmen1ScoreCard.NumberOfFours.ToString();
+                LblStrikerSixers.Text = batsmen1ScoreCard.NumberOfSixers.ToString();
+                LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
+                LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString("#.##");
             }
             else
             {
-               BoxViewStriker.IsVisible=true;
+                BoxViewStriker.IsVisible = true;
             }
 
             if (_cricketMatch.CurrentInnings.NonStriker != null)
             {
-                var batsmen2ScoreCard =_cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.NonStriker.Id);
+                var batsmen2ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.NonStriker.Id);
                 LblNonStrikerName.Text = _cricketMatch.CurrentInnings.NonStriker.Name;
                 LblNonStrikerRuns.Text = batsmen2ScoreCard.TotalRuns.ToString();
                 LblNonStrikerBalls.Text = batsmen2ScoreCard.BallsFaced.ToString();
                 LblNonStrikerFours.Text = batsmen2ScoreCard.NumberOfFours.ToString();
                 LblNonStrikerSixers.Text = batsmen2ScoreCard.NumberOfSixers.ToString();
                 LblNonStrikerZeros.Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
-                LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString("#.##"); 
+                LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString("#.##");
             }
             else
             {
                 BoxViewNonStriker.IsVisible = true;
             }
             UpdateControlState();
+
         }
 
         private void On0RunClicked(object sender, EventArgs e)
@@ -217,6 +224,8 @@ namespace StreetCricket.Views
 
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Legitimate, RunsType.Run, BoundaryType.None, runsScored,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
+
+            RecentOvers.Add(_cricketMatch.CurrentInnings.CurrentOver.Balls.Select(x => x.Runs).LastOrDefault().ToString());
             UpdateScoreBoard();
         }
         private void AddExtrasOfBall(int runsScored, int extrasScored, BallType ballType)
@@ -230,6 +239,8 @@ namespace StreetCricket.Views
         {
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, ballType, runsType, BoundaryType.None, runsScored,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, true, dismissedPlayer, feilder, disMissalType);
+
+            RecentOvers.Add(_cricketMatch.CurrentInnings.CurrentOver.Balls.Select(x => x.Runs).LastOrDefault().ToString());
             UpdateScoreBoard();
         }
         private void OnWide0Clicked(object sender, EventArgs e)
@@ -269,6 +280,7 @@ namespace StreetCricket.Views
         {
             _cricketMatch.AddBall(_cricketMatch.CurrentInnings.CurrentOver, BallType.Wide, RunsType.Wide, BoundaryType.None, runsScored,
                 _cricketMatch.CurrentInnings.CurrentOver.Bowler, _cricketMatch.CurrentInnings.Striker, false, null, null, DisMissalType.None);
+            RecentOvers.Add(_cricketMatch.CurrentInnings.CurrentOver.Balls.Select(x => x.Runs).LastOrDefault().ToString());
             UpdateScoreBoard();
             LayoutWides.IsVisible = false;
         }

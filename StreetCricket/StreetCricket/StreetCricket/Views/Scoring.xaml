@@ -53,7 +53,7 @@
                             <Label Grid.Row="0" Grid.Column="4" Text=" 4s " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label Grid.Row="0" Grid.Column="5" Text=" 6s " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label Grid.Row="0" Grid.Column="6" Text=" SR " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                           
+
                             <Label x:Name="LblStrikerName" Grid.Row="1" Grid.Column="0" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"></Label>
                             <Label x:Name="LblStrikerRuns" Grid.Row="1" Grid.Column="1" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label x:Name="LblStrikerBalls" Grid.Row="1" Grid.Column="2" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
@@ -69,19 +69,11 @@
                             <Label x:Name="LblNonStrikerFours" Grid.Row="2" Grid.Column="4" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label x:Name="LblNonStrikerSixers" Grid.Row="2" Grid.Column="5" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
                             <Label x:Name="LblNonStrikerStrikeRate" Grid.Row="2" Grid.Column="6" Text=" " Style="{DynamicResource LabelStyle}" HorizontalTextAlignment="Center"></Label>
-                            <ListView x:Name="LblRecentOvers" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Rotation="360" ItemsSource="{Binding RecentOvers}" RowHeight="40">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <ViewCell.View>
-                                                <StackLayout>
-                                                    <Label Text="{Binding}" BackgroundColor="DarkOliveGreen"  Opacity="0.9" FontSize="20" />
-                                                </StackLayout>
-                                            </ViewCell.View>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+
+                            <StackLayout x:Name="LblRecentOvers" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Spacing="10">
+                               
+                            </StackLayout>
+
                         </Grid>
                     </StackLayout>
                 </StackLayout>
