@@ -16,6 +16,16 @@
                             <StackLayout VerticalOptions="CenterAndExpand">
                                 <Label Text="{Binding Data.Name}" FontSize="20" />
                             </StackLayout>
+
+                            <Switch IsToggled="{Binding SwitchEnabled}"  x:Name="MySwitch">
+                                <Switch.Behaviors>
+                                    <!-- behaviors namespace comes from Xamarin.Forms behaviors nuget  -->
+                                    <behaviors:EventHandlerBehavior EventName="Toggled">
+                                        <behaviors:InvokeCommandAction Command="{Binding ToggleSwitchCommand}" />
+                                    </behaviors:EventHandlerBehavior>
+                                </Switch.Behaviors>
+                            </Switch>
+
                             <Switch IsToggled="{Binding Selected}" Grid.Column="1" Toggled="Switch_OnToggled"/>
                         </Grid>
                     </ViewCell>

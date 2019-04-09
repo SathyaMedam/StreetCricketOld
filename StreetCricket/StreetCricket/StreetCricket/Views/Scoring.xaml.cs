@@ -118,13 +118,13 @@ namespace StreetCricket.Views
             if (_cricketMatch.CurrentInnings.Striker != null)
             {
                 var batsmen1ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.Striker.Id);
-                LblStrikerName.Text = _cricketMatch.CurrentInnings.Striker.Name;
-                LblStrikerRuns.Text = batsmen1ScoreCard.TotalRuns.ToString();
-                LblStrikerBalls.Text = batsmen1ScoreCard.BallsFaced.ToString();
-                LblStrikerFours.Text = batsmen1ScoreCard.NumberOfFours.ToString();
-                LblStrikerSixers.Text = batsmen1ScoreCard.NumberOfSixers.ToString();
-                LblStrikerZeros.Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
-                LblStrikerStrikeRate.Text = batsmen1ScoreCard.StrikeRate.ToString("#.##");
+                LblStrikerName      .Text = _cricketMatch.CurrentInnings.Striker.Name;
+                LblStrikerRuns        .Text = batsmen1ScoreCard.TotalRuns.ToString();
+                LblStrikerBalls        .Text = batsmen1ScoreCard.BallsFaced.ToString();
+                LblStrikerFours       .Text = batsmen1ScoreCard.NumberOfFours.ToString();
+                LblStrikerSixers        .Text = batsmen1ScoreCard.NumberOfSixers.ToString();
+                LblStrikerZeros       .Text = batsmen1ScoreCard.NumberOfDotBalls.ToString();
+                LblStrikerStrikeRate   .Text = batsmen1ScoreCard.StrikeRate.ToString("#.##");
             }
             else
             {
@@ -134,13 +134,13 @@ namespace StreetCricket.Views
             if (_cricketMatch.CurrentInnings.NonStriker != null)
             {
                 var batsmen2ScoreCard = _cricketMatch.GetBattingScoreCard(true, 1, _cricketMatch.CurrentInnings.NonStriker.Id);
-                LblNonStrikerName.Text = _cricketMatch.CurrentInnings.NonStriker.Name;
-                LblNonStrikerRuns.Text = batsmen2ScoreCard.TotalRuns.ToString();
-                LblNonStrikerBalls.Text = batsmen2ScoreCard.BallsFaced.ToString();
-                LblNonStrikerFours.Text = batsmen2ScoreCard.NumberOfFours.ToString();
-                LblNonStrikerSixers.Text = batsmen2ScoreCard.NumberOfSixers.ToString();
-                LblNonStrikerZeros.Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
-                LblNonStrikerStrikeRate.Text = batsmen2ScoreCard.StrikeRate.ToString("#.##");
+                LblNonStrikerName                 .Text = _cricketMatch.CurrentInnings.NonStriker.Name;
+                LblNonStrikerRuns              .Text = batsmen2ScoreCard.TotalRuns.ToString();
+                LblNonStrikerBalls                       .Text = batsmen2ScoreCard.BallsFaced.ToString();
+                LblNonStrikerFours              .Text = batsmen2ScoreCard.NumberOfFours.ToString();
+                LblNonStrikerSixers             .Text = batsmen2ScoreCard.NumberOfSixers.ToString();
+                LblNonStrikerZeros               .Text = batsmen2ScoreCard.NumberOfDotBalls.ToString();
+                LblNonStrikerStrikeRate               .Text = batsmen2ScoreCard.StrikeRate.ToString("#.##");
             }
             else
             {
